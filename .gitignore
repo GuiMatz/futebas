@@ -1,0 +1,46 @@
+# Build e ferramentas locais
+jogo/target/
+jogo/target-*/
+.ferramentas/
+dist/
+teste-rapido/
+*.class
+__pycache__/
+*.pyc
+.venv/
+coleta/.venv/
+
+# Dados que o jogo usa para rodar, mas que não acompanham o código
+# (base do mundo, assets de terceiros e material gerado na coleta)
+dados/
+coleta/cache/
+coleta/intermediario/
+coleta/legado/
+coleta/*.json
+coleta/*.txt
+assets/*
+!assets/logo/
+jogo/src/main/resources/br/futebas/ui/fontes/
+
+# Saves, logs e capturas
+*.futebas.json.gz
+*.futebas.resumo
+*.log
+tools/screens/
+tools/balanco/
+tools/saude/
+captura-portfolio/
+captura-menu/
+
+# Segredos e configurações locais
+.env
+.env.*
+*.pem
+*.key
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml

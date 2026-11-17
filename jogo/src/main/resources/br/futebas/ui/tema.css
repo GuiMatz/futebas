@@ -1,0 +1,1578 @@
+/*
+ * FUTÉBAS: "Brasfoot moderno". Superfícies claras e frias, tabelas densas guiadas pelos
+ * escudos, verde-gramado só para a ação principal (JOGAR) e a cor do clube no cabeçalho.
+ * Tipos: Segoe UI no texto; "FUTEBAS Titulo" (Bahnschrift seminegrito) nos títulos;
+ * "FUTEBAS Placar" (Bahnschrift condensado negrito) em números grandes, placar e marca.
+ * Espaçamento: 4 · 8 · 12 · 16 · 24 · 32.
+ */
+.root {
+    -fundo: #121418; /* mais escuro: os painéis destacam do fundo (requisito 13/11) */
+    -superficie: #272c34;
+    -zebra: #2d333b;
+    -linha: #3b424d;
+    -linha-forte: #484f5a;
+    -tinta: #eef1f5;
+    -tinta2: #c3cad4;
+    -tinta3: #9aa4b1;
+    -gramado: #0b7a4b;
+    -gramado-hover: #096a41;
+    -gramado-claro: #1d3a2c;
+    /* acento = cor do clube do técnico (App aplica no topo da árvore); padrão verde */
+    -acento: #0b7a4b;
+    -acento-hover: #096a41;
+    -acento-claro: #1f3a2d;
+    -acento-medio: #24503b;
+    -acento-escuro: #6fe0a6;
+    -acento-texto: white;
+    -acento-nav: #2fbf7a;
+    -nav-fundo: linear-gradient(to bottom, #15201b 0%, #111418 60%);
+    -vermelho: #e5534b;
+    -vermelho-claro: #3e2427;
+    -ambar: #b7791f;
+    -ambar-claro: #3a3121;
+    -azul: #2759c9;
+    -azul-claro: #1f2b45;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: -tinta;
+    -fx-background-color: -fundo;
+    -fx-focus-color: -acento;
+    -fx-faint-focus-color: transparent;
+    -fx-accent: -acento;
+    -fx-selection-bar: -acento-medio;
+    -fx-selection-bar-non-focused: -acento-claro;
+    -fx-selection-bar-text: -tinta;
+}
+
+.label { -fx-text-fill: -tinta; }
+
+/* ------------------------------------------------------------------ tipografia */
+.titulo-tela { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 22px; -fx-text-fill: -tinta; }
+.titulo-painel { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: -acento-nav; }
+.titulo-menor { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -tinta2; }
+.texto-suave { -fx-text-fill: -tinta3; }
+.texto-medio { -fx-text-fill: -tinta2; }
+.texto-pequeno { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.texto-forte { -fx-font-weight: bold; }
+.numero { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; }
+.numero-grande { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 34px; }
+.numero-enorme { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 48px; }
+.positivo { -fx-text-fill: #3ac47f; }
+.negativo { -fx-text-fill: -vermelho; }
+.dado-rotulo { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.dado-valor { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 17px; -fx-text-fill: -tinta; }
+
+/* ------------------------------------------------------------------ superfícies */
+.conteudo { -fx-padding: 20 24 20 24; -fx-spacing: 16; }
+.painel {
+    -fx-background-color: -superficie;
+    -fx-background-radius: 8;
+    -fx-border-color: -linha;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0, 0, 2);
+    -fx-padding: 14 16 14 16;
+    -fx-spacing: 10;
+}
+.painel-sem-borda { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-padding: 14 16 14 16; -fx-spacing: 10; }
+.painel-tabela {
+    -fx-background-color: -superficie;
+    -fx-background-radius: 8;
+    -fx-border-color: -linha;
+    -fx-border-radius: 8;
+    -fx-padding: 0;
+}
+.painel-cabeca { -fx-padding: 12 16 10 16; -fx-spacing: 8; -fx-border-color: transparent transparent -linha transparent; }
+.separador-h { -fx-background-color: -linha; -fx-min-height: 1; -fx-pref-height: 1; -fx-max-height: 1; }
+.separador-v { -fx-background-color: -linha; -fx-min-width: 1; -fx-pref-width: 1; -fx-max-width: 1; }
+
+.aviso {
+    -fx-background-color: -ambar-claro;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent transparent transparent -ambar;
+    -fx-border-width: 0 0 0 3;
+    -fx-padding: 10 14 10 14;
+    -fx-spacing: 10;
+}
+.aviso-vermelho {
+    -fx-background-color: -vermelho-claro;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent transparent transparent -vermelho;
+    -fx-border-width: 0 0 0 3;
+    -fx-padding: 10 14 10 14;
+    -fx-spacing: 10;
+}
+.aviso-verde {
+    -fx-background-color: -gramado-claro;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent transparent transparent -gramado;
+    -fx-border-width: 0 0 0 3;
+    -fx-padding: 10 14 10 14;
+    -fx-spacing: 10;
+}
+.vazio { -fx-padding: 28 16 28 16; -fx-alignment: center; -fx-spacing: 6; }
+.vazio .label { -fx-text-fill: -tinta3; -fx-text-alignment: center; }
+
+/* ------------------------------------------------------------------ botões */
+.button {
+    -fx-background-color: -superficie;
+    -fx-background-radius: 6;
+    -fx-border-color: -linha-forte;
+    -fx-border-radius: 6;
+    -fx-padding: 6 14 6 14;
+    -fx-text-fill: -tinta;
+    -fx-font-size: 12.5px;
+    -fx-cursor: hand;
+}
+.button:hover { -fx-background-color: #313640; -fx-border-color: #59616d; }
+.button:pressed { -fx-background-color: #2c3139; }
+.button:focused { -fx-border-color: -acento; }
+.button:disabled { -fx-opacity: 0.45; }
+.button.primario { -fx-background-color: -acento; -fx-border-color: -acento; -fx-text-fill: -acento-texto; -fx-font-weight: bold; }
+.button.primario:hover { -fx-background-color: -acento-hover; -fx-border-color: -acento-hover; }
+.button.perigo { -fx-text-fill: -vermelho; }
+.button.perigo:hover { -fx-background-color: -vermelho-claro; -fx-border-color: -vermelho; }
+.button.fantasma { -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: -tinta2; }
+.button.fantasma:hover { -fx-background-color: #343943; }
+.button.chip {
+    -fx-background-radius: 14; -fx-border-radius: 14; -fx-padding: 4 12 4 12; -fx-font-size: 12px; -fx-text-fill: -tinta2;
+}
+.button.chip.ativo { -fx-background-color: -acento; -fx-border-color: -acento; -fx-text-fill: -acento-texto; }
+
+.toggle-button {
+    -fx-background-color: -superficie; -fx-border-color: -linha-forte; -fx-background-radius: 0; -fx-border-radius: 0;
+    -fx-padding: 5 12 5 12; -fx-text-fill: -tinta2; -fx-cursor: hand; -fx-font-size: 12px;
+}
+.toggle-button:selected { -fx-background-color: -acento; -fx-border-color: -acento; -fx-text-fill: -acento-texto; }
+.toggle-button.primeiro { -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; }
+.toggle-button.ultimo { -fx-background-radius: 0 6 6 0; -fx-border-radius: 0 6 6 0; }
+
+/* ------------------------------------------------------------------ campos */
+.text-field, .combo-box, .choice-box, .spinner {
+    -fx-background-color: -superficie;
+    -fx-background-radius: 6;
+    -fx-border-color: -linha-forte;
+    -fx-border-radius: 6;
+    -fx-font-size: 12.5px;
+}
+.text-field { -fx-padding: 5 9 5 9; -fx-prompt-text-fill: -tinta3; }
+.text-field:focused, .combo-box:focused, .choice-box:focused, .spinner:focused { -fx-border-color: -acento; }
+.spinner .text-field { -fx-border-color: transparent; -fx-background-color: transparent; }
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button { -fx-background-color: transparent; }
+.choice-box .label, .combo-box .list-cell { -fx-text-fill: -tinta; }
+.combo-box .list-cell { -fx-background-color: transparent; -fx-padding: 4 8 4 8; }
+.combo-box-popup .list-view { -fx-background-color: -superficie; -fx-border-color: -linha-forte; }
+.combo-box-popup .list-cell { -fx-padding: 5 10 5 10; }
+.combo-box-popup .list-cell:hover { -fx-background-color: #323741; }
+.context-menu { -fx-background-color: -superficie; -fx-border-color: -linha-forte; -fx-background-radius: 6; -fx-border-radius: 6; }
+.menu-item:focused { -fx-background-color: -acento-claro; }
+.menu-item:focused .label { -fx-text-fill: -tinta; }
+.check-box .box { -fx-background-color: white; -fx-border-color: -linha-forte; -fx-border-radius: 3; -fx-background-radius: 3; }
+.check-box:selected .box { -fx-background-color: -acento; -fx-border-color: -acento; }
+.check-box:selected .mark { -fx-background-color: -acento-texto; }
+.check-box:selected .mark { -fx-background-color: white; }
+.radio-button .radio { -fx-background-color: white; -fx-border-color: -linha-forte; -fx-border-radius: 10; -fx-background-radius: 10; }
+.radio-button:selected .dot { -fx-background-color: -acento; }
+.slider .track { -fx-background-color: -linha; -fx-pref-height: 4; }
+.slider .thumb { -fx-background-color: -acento; }
+
+/* ------------------------------------------------------------------ rolagem */
+.scroll-pane { -fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 0; }
+.scroll-pane > .viewport { -fx-background-color: transparent; }
+.scroll-bar { -fx-background-color: transparent; -fx-pref-width: 10; -fx-pref-height: 10; }
+.scroll-bar .thumb { -fx-background-color: #464d58; -fx-background-radius: 5; -fx-background-insets: 2; }
+.scroll-bar .thumb:hover { -fx-background-color: #5b6370; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-padding: 0; -fx-pref-height: 0; -fx-pref-width: 0; }
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow { -fx-padding: 0; -fx-shape: ""; }
+.scroll-pane .corner { -fx-background-color: transparent; }
+
+/* ------------------------------------------------------------------ tabelas */
+.table-view {
+    -fx-background-color: -superficie;
+    -fx-border-color: -linha;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 1;
+    -fx-table-cell-border-color: transparent;
+}
+.painel-tabela .table-view, .table-view.sem-borda { -fx-border-color: transparent; -fx-background-radius: 0 0 8 8; }
+.table-view:focused { -fx-background-color: -superficie; -fx-background-insets: 0; }
+.table-view .column-header-background { -fx-background-color: -superficie; -fx-background-radius: 8 8 0 0; }
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: -superficie;
+    -fx-border-color: transparent transparent -linha transparent;
+    -fx-size: 30;
+}
+.table-view .column-header .label {
+    -fx-font-size: 11px; -fx-text-fill: -tinta3; -fx-font-weight: normal; -fx-alignment: center-left; -fx-padding: 0 8 0 8;
+}
+.table-view .column-header.centro .label { -fx-alignment: center; }
+.table-view .column-header.direita .label { -fx-alignment: center-right; }
+.table-view .column-resize-line { -fx-background-color: -acento; }
+.table-row-cell { -fx-background-color: -superficie; -fx-cell-size: 30; -fx-border-color: transparent; }
+.table-row-cell:odd { -fx-background-color: -zebra; }
+.table-row-cell:hover { -fx-background-color: #30353e; }
+.table-row-cell:selected, .table-row-cell:selected:hover { -fx-background-color: -acento-medio; }
+.table-row-cell:selected .table-cell, .table-row-cell:selected .label { -fx-text-fill: -tinta; }
+.table-cell { -fx-padding: 0 8 0 8; -fx-alignment: center-left; -fx-text-fill: -tinta; }
+.table-cell.centro { -fx-alignment: center; }
+.table-cell.direita { -fx-alignment: center-right; }
+.table-cell.num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-alignment: center; }
+.table-cell.num-forte { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 15px; -fx-alignment: center; -fx-font-weight: bold; }
+.table-row-cell.meu-clube { -fx-background-color: -acento-claro; }
+.table-row-cell.meu-clube .table-cell { -fx-text-fill: -acento-escuro; }
+.table-row-cell.meu-clube .table-cell { -fx-font-weight: bold; }
+.table-row-cell.indisponivel .table-cell { -fx-text-fill: -tinta3; }
+.table-view .placeholder .label { -fx-text-fill: -tinta3; }
+
+/* faixa lateral das zonas da tabela de classificação (posição) */
+.zona { -fx-min-width: 22; -fx-pref-width: 22; -fx-alignment: center; -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 13px; -fx-background-radius: 4; }
+.zona-acesso { -fx-background-color: #0b7a4b; -fx-text-fill: white; }
+.zona-classifica { -fx-background-color: #2759c9; -fx-text-fill: white; }
+.zona-playoff { -fx-background-color: #e8b53d; -fx-text-fill: #3b2a05; }
+.zona-queda { -fx-background-color: #c8372d; -fx-text-fill: white; }
+
+/* ------------------------------------------------------------------ listas */
+.list-view { -fx-background-color: -superficie; -fx-border-color: -linha; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 1; }
+.list-view:focused { -fx-background-insets: 0; }
+.list-cell { -fx-background-color: -superficie; -fx-padding: 7 12 7 12; -fx-text-fill: -tinta; }
+.list-cell:filled:hover { -fx-background-color: #30353e; }
+.list-cell:filled:selected, .list-cell:filled:selected:hover { -fx-background-color: -acento-medio; -fx-text-fill: -tinta; }
+.list-cell:filled:selected .label { -fx-text-fill: -tinta; }
+.list-view.lista-lateral { -fx-border-color: transparent; -fx-background-color: transparent; }
+.lista-lateral .list-cell { -fx-background-color: transparent; -fx-padding: 6 10 6 10; -fx-background-radius: 6; }
+.lista-lateral .list-cell:filled:hover { -fx-background-color: #30353e; }
+.lista-lateral .list-cell:filled:selected { -fx-background-color: -superficie; -fx-border-color: -linha; -fx-border-radius: 6; }
+
+/* ------------------------------------------------------------------ abas (sublinhado) */
+.tab-pane > .tab-header-area { -fx-padding: 0 0 0 0; }
+.tab-pane > .tab-header-area > .tab-header-background { -fx-background-color: transparent; -fx-border-color: transparent transparent -linha transparent; }
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: transparent; -fx-padding: 6 14 8 14; -fx-background-insets: 0; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: -tinta2; -fx-font-size: 13px; }
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-border-color: transparent transparent -acento transparent; -fx-border-width: 0 0 3 0;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label { -fx-text-fill: -tinta; -fx-font-weight: bold; }
+.tab-pane > .tab-header-area > .headers-region > .tab:hover .tab-label { -fx-text-fill: -tinta; }
+.tab-pane > .tab-content-area { -fx-background-color: transparent; -fx-padding: 12 0 0 0; }
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator { -fx-border-color: transparent; }
+
+/* ------------------------------------------------------------------ barras */
+.progress-bar > .bar { -fx-background-color: -acento; -fx-background-radius: 3; -fx-background-insets: 0; -fx-padding: 3; }
+.progress-bar > .track { -fx-background-color: #3a3f48; -fx-background-radius: 3; -fx-background-insets: 0; }
+.progress-bar.media > .bar { -fx-background-color: #d89a1c; }
+.progress-bar.baixa > .bar { -fx-background-color: -vermelho; }
+.barra-cab > .track { -fx-background-color: rgba(255,255,255,0.22); }
+.barra-cab > .bar { -fx-background-color: white; }
+.barra-cab.media > .bar { -fx-background-color: #f5c451; }
+.barra-cab.baixa > .bar { -fx-background-color: #ff8a7a; }
+
+.attr.f1 > .bar { -fx-background-color: #c8372d; }
+.attr.f2 > .bar { -fx-background-color: #d9771c; }
+.attr.f3 > .bar { -fx-background-color: #c9a21a; }
+.attr.f4 > .bar { -fx-background-color: #6a9a2a; }
+.attr.f5 > .bar { -fx-background-color: #138a4f; }
+.attr.f6 > .bar { -fx-background-color: #0b5c3a; }
+
+/* ------------------------------------------------------------------ insígnias */
+.pos {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11.5px; -fx-padding: 1 0 1 0;
+    -fx-min-width: 34; -fx-pref-width: 34; -fx-alignment: center; -fx-background-radius: 4;
+}
+.pos-g { -fx-background-color: rgba(232,170,40,0.18); -fx-text-fill: #f0c056; }
+.pos-d { -fx-background-color: rgba(90,140,255,0.18); -fx-text-fill: #94b4ff; }
+.pos-m { -fx-background-color: rgba(50,200,120,0.16); -fx-text-fill: #62d69b; }
+.pos-a { -fx-background-color: rgba(240,90,80,0.18); -fx-text-fill: #ff9288; }
+.forca {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 13.5px; -fx-text-fill: white;
+    -fx-min-width: 30; -fx-pref-width: 30; -fx-alignment: center; -fx-background-radius: 5; -fx-padding: 1 0 1 0;
+}
+.forca.f1 { -fx-background-color: #c8372d; }
+.forca.f2 { -fx-background-color: #d9771c; }
+.forca.f3 { -fx-background-color: #c9a21a; -fx-text-fill: #2e2604; }
+.forca.f4 { -fx-background-color: #6a9a2a; }
+.forca.f5 { -fx-background-color: #138a4f; }
+.forca.f6 { -fx-background-color: #0b5c3a; }
+.forca-texto.f1 { -fx-text-fill: #ff6a5c; }
+.forca-texto.f2 { -fx-text-fill: #f08a3a; }
+.forca-texto.f3 { -fx-text-fill: #e3bd2e; }
+.forca-texto.f4 { -fx-text-fill: #9ccc58; }
+.forca-texto.f5 { -fx-text-fill: #39c47f; }
+.forca-texto.f6 { -fx-text-fill: #4fdc98; }
+.forma {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11px; -fx-text-fill: white;
+    -fx-min-width: 18; -fx-pref-width: 18; -fx-min-height: 18; -fx-alignment: center; -fx-background-radius: 9;
+}
+.forma-v { -fx-background-color: #138a4f; }
+.forma-e { -fx-background-color: #66707c; }
+.forma-d { -fx-background-color: #c8372d; }
+.etiqueta {
+    -fx-font-size: 10.5px; -fx-font-weight: bold; -fx-padding: 1 7 1 7; -fx-background-radius: 9;
+    -fx-background-color: #3a4049; -fx-text-fill: -tinta2;
+}
+.etiqueta.verde { -fx-background-color: -gramado-claro; -fx-text-fill: #62d69b; }
+.etiqueta.vermelha { -fx-background-color: -vermelho-claro; -fx-text-fill: #ff9288; }
+.etiqueta.ambar { -fx-background-color: -ambar-claro; -fx-text-fill: #f0c056; }
+.etiqueta.azul { -fx-background-color: -azul-claro; -fx-text-fill: #94b4ff; }
+.etiqueta.escura { -fx-background-color: #4a515c; -fx-text-fill: white; }
+.contador {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11px; -fx-text-fill: white; -fx-background-color: -vermelho;
+    -fx-background-radius: 9; -fx-padding: 0 6 0 6; -fx-min-width: 18; -fx-alignment: center;
+}
+.tecla {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 10.5px; -fx-text-fill: -tinta3; -fx-background-color: #353a43;
+    -fx-border-color: #454b55; -fx-border-radius: 3; -fx-background-radius: 3; -fx-padding: 0 4 0 4;
+}
+
+/* ------------------------------------------------------------------ cabeçalho do clube */
+.cabecalho { -fx-padding: 10 20 10 16; -fx-spacing: 16; -fx-min-height: 64; }
+.cabecalho .label { -fx-text-fill: white; }
+.cabecalho.neutro { -fx-background-color: linear-gradient(to right, #14171c 0%, #20252c 100%); }
+.faixa-gramado { -fx-background-color: -acento; }
+.cab-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 21px; }
+.cab-meta { -fx-font-size: 11.5px; -fx-opacity: 0.82; }
+.cab-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 19px; }
+.cab-rotulo { -fx-font-size: 10.5px; -fx-opacity: 0.75; }
+.cab-sep { -fx-background-color: rgba(255,255,255,0.22); -fx-min-width: 1; -fx-pref-width: 1; -fx-max-width: 1; -fx-max-height: 36; }
+.cabecalho .button {
+    -fx-background-color: rgba(255,255,255,0.12); -fx-border-color: rgba(255,255,255,0.28); -fx-text-fill: white;
+}
+.cabecalho .button:hover { -fx-background-color: rgba(255,255,255,0.22); }
+.cabecalho .tecla { -fx-background-color: rgba(255,255,255,0.15); -fx-border-color: transparent; -fx-text-fill: white; }
+.faixa-clube { -fx-min-height: 4; -fx-pref-height: 4; -fx-max-height: 4; }
+
+/* ------------------------------------------------------------------ navegação (escura) */
+.nav { -fx-background-color: -nav-fundo; -fx-border-color: transparent; -fx-pref-width: 244; -fx-min-width: 244; -fx-padding: 10 10 12 10; -fx-spacing: 1; }
+.nav-rolo, .nav-rolo > .viewport { -fx-background-color: #111418; -fx-background: #111418; -fx-padding: 0; -fx-background-insets: 0; -fx-border-color: transparent; }
+.nav-rolo > .scroll-bar:vertical { -fx-pref-width: 8; -fx-background-color: transparent; }
+.nav-rolo > .scroll-bar:vertical > .thumb { -fx-background-color: rgba(255,255,255,0.16); -fx-background-radius: 4; }
+.nav-rolo > .scroll-bar > .increment-button, .nav-rolo > .scroll-bar > .decrement-button { -fx-pref-height: 0; -fx-padding: 0; }
+.nav-grupo { -fx-font-size: 10.5px; -fx-text-fill: rgba(255,255,255,0.42); -fx-padding: 12 10 4 10; }
+.nav-item {
+    -fx-background-color: transparent; -fx-border-color: transparent; -fx-background-radius: 6; -fx-border-radius: 6;
+    -fx-padding: 6 10 6 10; -fx-text-fill: rgba(255,255,255,0.74); -fx-font-size: 13px; -fx-alignment: center-left; -fx-max-width: infinity;
+}
+.nav-item:hover { -fx-background-color: rgba(255,255,255,0.06); -fx-text-fill: white; }
+.nav-item.ativo {
+    -fx-background-color: rgba(255,255,255,0.09); -fx-text-fill: white; -fx-font-weight: bold;
+    -fx-border-color: transparent transparent transparent -acento-nav; -fx-border-width: 0 0 0 3; -fx-background-radius: 0 6 6 0; -fx-border-radius: 0;
+}
+.nav .tecla { -fx-background-color: rgba(255,255,255,0.07); -fx-border-color: transparent; -fx-text-fill: rgba(255,255,255,0.5); }
+.nav-item.ativo .tecla { -fx-background-color: -acento-nav; -fx-text-fill: #0e1720; -fx-border-color: transparent; }
+
+.jogar {
+    -fx-background-color: -acento; -fx-background-radius: 8; -fx-border-color: transparent;
+    -fx-padding: 10 12 10 12; -fx-cursor: hand; -fx-max-width: infinity;
+}
+.jogar:hover { -fx-background-color: -acento-hover; }
+.jogar:pressed { -fx-background-color: -acento-escuro; }
+.jogar .label { -fx-text-fill: -acento-texto; }
+.jogar-texto { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 24px; }
+.jogar-sub { -fx-font-size: 11px; -fx-opacity: 0.88; }
+.button.jogar-grande {
+    -fx-background-color: -acento; -fx-border-color: -acento; -fx-text-fill: -acento-texto; -fx-font-family: "FUTEBAS Placar";
+    -fx-font-size: 18px; -fx-padding: 8 28 8 28; -fx-background-radius: 8; -fx-border-radius: 8;
+}
+.button.jogar-grande:hover { -fx-background-color: -acento-hover; -fx-border-color: -acento-hover; }
+
+/* ------------------------------------------------------------------ início */
+.faixa-campo { -fx-background-color: -gramado; }
+
+/* ------------------------------------------------------------------ novo jogo */
+.coluna-escolha { -fx-background-color: -superficie; -fx-border-color: transparent -linha transparent transparent; -fx-padding: 14 10 10 10; -fx-spacing: 8; }
+.coluna-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -tinta2; -fx-padding: 0 6 0 6; }
+.coluna-escolha .list-view { -fx-border-color: transparent; -fx-background-color: transparent; -fx-padding: 0; }
+.coluna-escolha .list-cell { -fx-background-color: transparent; -fx-padding: 6 8 6 8; -fx-background-radius: 6; }
+.coluna-escolha .list-cell:filled:hover { -fx-background-color: #30353e; }
+.coluna-escolha .list-cell:filled:selected { -fx-background-color: -acento-claro; }
+.coluna-escolha .list-cell:filled:selected .label { -fx-text-fill: -acento-escuro; }
+.coluna-escolha .list-cell:filled:selected .item-escolha-meta { -fx-text-fill: -acento-escuro; }
+.item-escolha-meta { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.grade-clubes { -fx-padding: 4 20 20 20; -fx-hgap: 10; -fx-vgap: 10; }
+.cartao-clube {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8;
+    -fx-padding: 14 8 10 8; -fx-spacing: 6; -fx-alignment: top-center; -fx-cursor: hand;
+}
+.cartao-clube:hover { -fx-border-color: #5d6672; }
+.cartao-clube.selecionado { -fx-border-color: -acento; -fx-border-width: 2; -fx-padding: 13 7 9 7; -fx-background-color: -acento-claro; }
+.cartao-clube .nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-alignment: center; -fx-alignment: center; }
+.estrela { -fx-text-fill: #d39b1c; }
+.estrela-vazia { -fx-text-fill: #4a515c; }
+.barra-comecar { -fx-background-color: -superficie; -fx-border-color: -linha transparent transparent transparent; -fx-padding: 12 20 12 20; -fx-spacing: 14; -fx-alignment: center-left; }
+.passo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -tinta3; }
+.passo.ativo { -fx-text-fill: -tinta; }
+
+/* ------------------------------------------------------------------ campo (escalação) */
+.campo { -fx-background-color: #287e46; -fx-background-radius: 8; }
+.vaga { -fx-cursor: hand; }
+/* foto: aro fino na cor do time (inline) e sombra curta */
+.foto-aro { -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0.25, 0, 1); }
+.foto-aro-vazia {
+    -fx-background-color: rgba(0,0,0,0.22); -fx-border-color: rgba(255,255,255,0.55); -fx-border-width: 1.4;
+    -fx-border-style: segments(4, 3);
+}
+/* placa do jogador: nome em cima, [posição | força] e a energia no pé */
+.vaga-placa {
+    -fx-background-color: linear-gradient(to bottom, rgba(26,31,38,0.95), rgba(13,16,20,0.95));
+    -fx-background-radius: 6; -fx-border-color: rgba(255,255,255,0.10); -fx-border-radius: 6; -fx-border-width: 1;
+    -fx-padding: 8 6 3 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 4, 0.2, 0, 1);
+}
+.vaga-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 12px; -fx-text-fill: white; -fx-padding: 0; }
+.vaga-nome-vazio { -fx-text-fill: rgba(255,255,255,0.45); }
+.vaga-info { -fx-background-color: rgba(255,255,255,0.06); -fx-background-radius: 3; }
+.vaga-pos {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11px; -fx-padding: 0 5 0 5; -fx-min-height: 15; -fx-alignment: center;
+    -fx-background-radius: 3 0 0 3; -fx-text-fill: rgba(255,255,255,0.8);
+}
+.vaga-pos.vaga-pos-so { -fx-background-radius: 3; }
+.vaga-pos-fora { -fx-background-color: #b02e24; -fx-text-fill: white; }
+.vaga-forca {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 12px; -fx-text-fill: white; -fx-min-width: 22; -fx-min-height: 15;
+    -fx-alignment: center; -fx-padding: 0 4 0 4; -fx-background-radius: 0 3 3 0;
+}
+.vaga-forca.f1 { -fx-background-color: #c8372d; }
+.vaga-forca.f2 { -fx-background-color: #d9771c; }
+.vaga-forca.f3 { -fx-background-color: #c9a21a; -fx-text-fill: #2e2604; }
+.vaga-forca.f4 { -fx-background-color: #6a9a2a; }
+.vaga-forca.f5 { -fx-background-color: #138a4f; }
+.vaga-forca.f6 { -fx-background-color: #0b5c3a; }
+.vaga-energia-num { -fx-font-size: 10.5px; }
+.vaga-placa .energia-trilha { -fx-background-color: rgba(255,255,255,0.12); -fx-background-radius: 2; }
+.vaga-placa .energia-cheia { -fx-background-radius: 2; }
+/* capitão: braçadeira */
+.vaga-capitao {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 10px; -fx-text-fill: #2b1f02; -fx-alignment: center; -fx-padding: 0;
+    -fx-background-color: #f5c451; -fx-background-radius: 3; -fx-border-color: rgba(0,0,0,0.55); -fx-border-radius: 3; -fx-border-width: 0.8;
+}
+.vaga-marca { -fx-font-size: 10px; -fx-padding: 0 6 0 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 3, 0.3, 0, 1); }
+.vaga-marca.vermelha { -fx-background-color: #b02e24; -fx-text-fill: white; }
+.vaga-marca.azul { -fx-background-color: #2f6fe0; -fx-text-fill: white; }
+.vaga-marca.ambar { -fx-background-color: #b7791f; -fx-text-fill: white; }
+/* estados */
+.vaga.selecionada .vaga-placa { -fx-background-color: linear-gradient(to bottom, rgba(74,58,16,0.96), rgba(40,31,8,0.96)); -fx-border-color: #f5c451; }
+.vaga.selecionada .vaga-nome { -fx-text-fill: #ffd76e; }
+.vaga.selecionada .foto-aro { -fx-effect: dropshadow(gaussian, rgba(245,196,81,0.9), 8, 0.45, 0, 0); }
+.vaga-placa.alerta { -fx-border-color: #e5534b; }
+.vaga-placa.alerta .vaga-nome { -fx-text-fill: #ff9288; }
+.vaga.vazia .vaga-placa { -fx-background-color: rgba(10,14,18,0.55); -fx-border-color: rgba(255,255,255,0.18); -fx-border-style: segments(4, 3); }
+
+/* ------------------------------------------------------------------ partida (placar de TV) */
+.placar { -fx-background-color: linear-gradient(to bottom, #15212c 0%, #0e1720 100%); -fx-padding: 14 28 10 28; -fx-spacing: 0; }
+.placar .label { -fx-text-fill: white; }
+.placar-comp { -fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.62); }
+.placar-time { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 26px; }
+.placar-gols-caixa { -fx-background-color: #f4f6f8; -fx-background-radius: 6; -fx-padding: 0 14 0 14; -fx-min-width: 64; -fx-alignment: center; }
+.placar .placar-gols-caixa .label { -fx-text-fill: #0e1720; }
+.placar-gols { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 62px; }
+.placar-relogio {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 18px; -fx-background-color: #0b7a4b; -fx-background-radius: 4; -fx-padding: 1 12 1 12;
+}
+.placar-relogio.parado { -fx-background-color: #3a4652; }
+.placar-autores { -fx-font-size: 11.5px; }
+.placar .placar-autores { -fx-text-fill: rgba(255,255,255,0.72); }
+.placar-trilha { -fx-background-color: rgba(255,255,255,0.10); -fx-min-height: 3; -fx-pref-height: 3; -fx-max-height: 3; -fx-background-radius: 2; }
+.placar-trilha-cheia { -fx-background-color: #2fbf7a; -fx-min-height: 3; -fx-pref-height: 3; -fx-max-height: 3; -fx-background-radius: 2; }
+.narracao-fundo { -fx-background-color: -superficie; }
+.lance { -fx-padding: 7 16 7 14; -fx-spacing: 10; -fx-alignment: top-left; -fx-border-color: transparent transparent #30353d transparent; }
+.lance-minuto { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta3; -fx-min-width: 42; }
+.lance-texto { -fx-font-size: 13px; }
+.lance-gol { -fx-background-color: rgba(50,200,120,0.14); -fx-border-color: transparent transparent transparent #0b7a4b; -fx-border-width: 0 0 0 4; }
+.lance-gol .lance-texto { -fx-font-weight: bold; }
+.lance-gol .lance-minuto { -fx-text-fill: #0b7a4b; }
+.lance-gol-contra { -fx-background-color: rgba(240,90,80,0.14); -fx-border-color: transparent transparent transparent #c8372d; -fx-border-width: 0 0 0 4; }
+.lance-gol-contra .lance-texto { -fx-font-weight: bold; }
+.lance-gol-contra .lance-minuto { -fx-text-fill: #c8372d; }
+.lance-vermelho .lance-texto { -fx-text-fill: #ff9288; -fx-font-weight: bold; }
+.lance-cartao .lance-texto { -fx-text-fill: #f0c056; }
+.lance-sub .lance-texto { -fx-text-fill: -tinta2; }
+.lance-fase { -fx-background-color: #23272d; }
+.lance-fase .lance-texto { -fx-font-family: "FUTEBAS Titulo"; -fx-text-fill: -tinta2; }
+.lance-separador { -fx-background-color: #101820; -fx-padding: 6 14 6 14; }
+.lance-separador .label { -fx-text-fill: white; -fx-font-family: "FUTEBAS Titulo"; }
+.icone-lance { -fx-min-width: 18; -fx-pref-width: 18; -fx-alignment: center; }
+.icone-sub { -fx-text-fill: #39c47f; -fx-font-size: 14px; -fx-font-weight: bold; }
+.icone-penalti { -fx-fill: white; -fx-stroke: #f5c451; -fx-stroke-width: 2; }
+.cartao-amarelo { -fx-background-color: #f2c230; -fx-min-width: 10; -fx-pref-width: 10; -fx-max-width: 10; -fx-min-height: 14; -fx-max-height: 14; -fx-background-radius: 2; -fx-rotate: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 3, 0, 1, 1); }
+.cartao-vermelho { -fx-background-color: #d0342a; -fx-min-width: 10; -fx-pref-width: 10; -fx-max-width: 10; -fx-min-height: 14; -fx-max-height: 14; -fx-background-radius: 2; -fx-rotate: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 3, 0, 1, 1); }
+.estat-barra-a { -fx-background-color: -acento-nav; -fx-background-radius: 3 0 0 3; }
+.estat-barra-b { -fx-background-color: #5a626e; -fx-background-radius: 0 3 3 0; }
+.comp-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 15px; }
+.comp-rotulo { -fx-font-size: 11.5px; -fx-text-fill: -tinta2; }
+.lateral-partida { -fx-padding: 12 16 12 12; -fx-spacing: 12; }
+.atleta { -fx-padding: 2 6 2 6; -fx-spacing: 7; -fx-background-radius: 5; -fx-cursor: hand; -fx-alignment: center-left; }
+.atleta:hover { -fx-background-color: #eef2f6; }
+.atleta.sai { -fx-background-color: rgba(240,90,80,0.14); }
+.atleta.entra { -fx-background-color: rgba(50,200,120,0.14); }
+.atleta.fora { -fx-opacity: 0.45; }
+.rodape-partida { -fx-background-color: -superficie; -fx-border-color: -linha transparent transparent transparent; -fx-padding: 10 20 10 20; -fx-spacing: 10; -fx-alignment: center-left; }
+.rotulo-rodape { -fx-font-size: 11.5px; -fx-text-fill: -tinta3; }
+.resultado-linha { -fx-padding: 3 0 3 0; -fx-spacing: 8; -fx-alignment: center; }
+.resultado-placar {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-background-color: #101820; -fx-text-fill: white;
+    -fx-background-radius: 4; -fx-padding: 1 0 1 0; -fx-min-width: 46; -fx-pref-width: 46; -fx-alignment: center;
+}
+
+/* ------------------------------------------------------------------ troféus */
+.trofeu-caixa { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 12 10 10 10; -fx-spacing: 6; -fx-alignment: top-center; }
+.trofeu-caixa.vazio-trofeu { -fx-opacity: 0.45; }
+.trofeu-conta { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 22px; }
+.cartao-campeao {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8;
+    -fx-padding: 12 12 12 12; -fx-spacing: 12; -fx-alignment: center-left;
+}
+.cartao-campeao.meu { -fx-border-color: -acento; -fx-background-color: -acento-claro; }
+.campeao-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 14px; }
+.campeao-comp { -fx-font-size: 11.5px; -fx-text-fill: -tinta3; }
+
+/* ------------------------------------------------------------------ fim de temporada, convites, manchetes */
+.numero-temporada { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 40px; }
+.veredito-texto { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: -tinta; }
+.movimento { -fx-spacing: 8; -fx-alignment: center-left; -fx-padding: 3 0 3 0; }
+.seta-sobe { -fx-text-fill: #138a4f; -fx-font-size: 11px; }
+.seta-cai { -fx-text-fill: -vermelho; -fx-font-size: 11px; }
+.convite {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8;
+    -fx-padding: 14 16 14 16; -fx-spacing: 14; -fx-alignment: center-left;
+}
+.convite.selecao { -fx-border-color: #d39b1c; -fx-border-width: 1 1 1 4; -fx-background-color: #33301f; }
+.manchete { -fx-padding: 8 12 8 12; -fx-spacing: 3; -fx-border-color: transparent transparent #30353d transparent; }
+.manchete-data { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 12px; -fx-text-fill: -tinta3; }
+.manchete-texto { -fx-font-size: 12.5px; }
+.manchete.titulo .manchete-texto { -fx-font-weight: bold; }
+
+/* ------------------------------------------------------------------ barra de atalhos */
+.barra-status { -fx-background-color: -superficie; -fx-border-color: -linha transparent transparent transparent; -fx-padding: 5 16 5 16; -fx-spacing: 14; -fx-alignment: center-left; }
+.barra-status .label { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+
+/* ------------------------------------------------------------------ espera, aviso rápido, diálogos */
+.espera { -fx-background-color: rgba(12,14,18,0.6); }
+.espera-caixa {
+    -fx-background-color: -superficie; -fx-background-radius: 10; -fx-border-color: -linha; -fx-border-radius: 10;
+    -fx-padding: 22 32 22 32; -fx-effect: dropshadow(gaussian, rgba(17,27,36,0.16), 24, 0, 0, 6);
+}
+.progress-indicator { -fx-progress-color: -acento; }
+.toast {
+    -fx-background-color: #3b414b; -fx-background-radius: 8; -fx-padding: 10 18 10 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 16, 0, 0, 4);
+}
+.toast .label { -fx-text-fill: white; }
+.dialog-pane { -fx-background-color: -superficie; -fx-padding: 0; }
+.dialog-pane > .header-panel { -fx-background-color: -superficie; -fx-padding: 18 20 6 20; -fx-border-color: transparent; }
+.dialog-pane > .header-panel .label { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 17px; }
+.dialog-pane > .content { -fx-padding: 8 20 14 20; }
+.dialog-pane > .button-bar > .container { -fx-padding: 10 20 16 20; -fx-background-color: #22262c; }
+.dialog-pane .graphic-container { -fx-padding: 0; }
+.tooltip { -fx-background-color: #3b414b; -fx-text-fill: white; -fx-font-size: 12px; -fx-background-radius: 6; -fx-padding: 6 10 6 10; }
+.hyperlink { -fx-text-fill: -azul; -fx-padding: 0; }
+
+/* etiquetas mantêm as cores dentro de linhas selecionadas */
+.list-cell:filled:selected .etiqueta.escura, .table-row-cell:selected .etiqueta.escura { -fx-text-fill: white; }
+.list-cell:filled:selected .etiqueta.verde, .table-row-cell:selected .etiqueta.verde { -fx-text-fill: #62d69b; }
+.list-cell:filled:selected .etiqueta.vermelha, .table-row-cell:selected .etiqueta.vermelha { -fx-text-fill: #ff9288; }
+.list-cell:filled:selected .etiqueta.ambar, .table-row-cell:selected .etiqueta.ambar { -fx-text-fill: #f0c056; }
+/* estrelas continuam visíveis na linha selecionada (antes ficavam todas da cor do texto) */
+.table-row-cell:selected .label.estrela, .list-cell:filled:selected .label.estrela { -fx-text-fill: #f0c056; }
+.table-row-cell:selected .label.estrela.estrela-vazia, .list-cell:filled:selected .label.estrela.estrela-vazia { -fx-text-fill: rgba(255,255,255,0.28); }
+.list-cell:filled:selected .etiqueta.azul, .table-row-cell:selected .etiqueta.azul { -fx-text-fill: #94b4ff; }
+.list-cell:filled:selected .forca, .table-row-cell:selected .forca { -fx-text-fill: white; }
+.list-cell:filled:selected .forca.f3, .table-row-cell:selected .forca.f3 { -fx-text-fill: #2e2604; }
+.table-row-cell:selected .zona-acesso, .table-row-cell:selected .zona-classifica, .table-row-cell:selected .zona-queda { -fx-text-fill: white; }
+.table-row-cell:selected .pos-g, .list-cell:filled:selected .pos-g { -fx-text-fill: #f0c056; }
+.table-row-cell:selected .pos-d, .list-cell:filled:selected .pos-d { -fx-text-fill: #94b4ff; }
+.table-row-cell:selected .pos-m, .list-cell:filled:selected .pos-m { -fx-text-fill: #62d69b; }
+.table-row-cell:selected .pos-a, .list-cell:filled:selected .pos-a { -fx-text-fill: #ff9288; }
+
+/* painel sobreposto da partida (intervalo, expulsão, tática) */
+.sobreposicao { -fx-background-color: rgba(14,23,32,0.62); -fx-padding: 40; }
+.caixa-sobreposta {
+    -fx-background-color: -fundo; -fx-background-radius: 12; -fx-padding: 22 24 20 24;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 30, 0, 0, 8);
+}
+
+/* pesquisa no cabeçalho */
+.cabecalho .text-field.busca {
+    -fx-background-color: rgba(255,255,255,0.14); -fx-border-color: rgba(255,255,255,0.22); -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255,255,255,0.62); -fx-background-radius: 16; -fx-border-radius: 16; -fx-padding: 6 14 6 14;
+}
+.cabecalho .text-field.busca:focused { -fx-background-color: white; -fx-text-fill: -tinta; -fx-prompt-text-fill: -tinta3; }
+.resultados-busca { -fx-effect: dropshadow(gaussian, rgba(17,27,36,0.22), 22, 0, 0, 6); -fx-background-radius: 8; }
+
+
+/* ------------------------------------------------------------------ tema escuro: ajustes finais */
+.text-field, .combo-box, .choice-box, .spinner { -fx-text-fill: -tinta; }
+.text-field { -fx-background-color: #20242a; }
+.combo-box, .choice-box, .spinner { -fx-background-color: #2d323a; }
+.combo-box .arrow, .choice-box .open-button .arrow { -fx-background-color: -tinta2; }
+.check-box, .radio-button { -fx-text-fill: -tinta; }
+.check-box .box, .radio-button .radio { -fx-background-color: #20242a; }
+.text-input { -fx-highlight-fill: -acento; -fx-highlight-text-fill: -acento-texto; }
+.list-cell { -fx-text-fill: -tinta; }
+.tab-pane > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: -tinta3; }
+.trofeu-caixa { -fx-background-color: #2b3038; }
+.caixa-sobreposta { -fx-background-color: -fundo; -fx-border-color: -linha; -fx-border-radius: 12; }
+.placar-gols-caixa { -fx-background-color: #f1f3f6; }
+.menu-sub { -fx-text-fill: -tinta3; }
+.context-menu { -fx-background-color: -superficie; }
+.menu-item .label { -fx-text-fill: -tinta; }
+.cabecalho .text-field.busca:focused { -fx-background-color: #2d323a; -fx-text-fill: -tinta; }
+.dialog-pane .label { -fx-text-fill: -tinta; }
+
+/* ícones da navegação e JOGAR no cabeçalho */
+.nav-icone { -fx-fill: transparent; -fx-stroke: rgba(255,255,255,0.62); -fx-stroke-width: 1.9; -fx-stroke-line-cap: round; -fx-stroke-line-join: round; }
+.nav-item:hover .nav-icone { -fx-stroke: white; }
+.nav-item.ativo .nav-icone { -fx-stroke: -acento-nav; }
+.cabecalho .jogar { -fx-padding: 6 16 6 12; -fx-background-radius: 6; -fx-max-width: -1; }
+.cabecalho .jogar .jogar-texto { -fx-font-size: 19px; }
+.cabecalho .jogar .jogar-sub { -fx-font-size: 11px; }
+
+/* Kings League ao vivo */
+.kings-fase { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 14px; -fx-text-fill: #f5c451; }
+/* carta secreta (12/11/2026, estilo das cartas oficiais): escudo verde desenhado no CartaKings, título preto, ícone de traço, faixa preta */
+/* a sombra e o brilho da carta vêm do código (setEffect), não do CSS: o CSS venceria o brilho */
+.kings-carta { -fx-background-color: transparent; -fx-padding: 0; }
+.kings-carta-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-weight: bold; -fx-text-fill: #0b0d0b; -fx-line-spacing: -3; }
+.kings-carta-faixa-texto { -fx-font-family: "FUTEBAS Titulo"; -fx-line-spacing: -2; }
+.kings-carta-monograma { -fx-font-family: "FUTEBAS Titulo"; -fx-font-weight: bold; -fx-text-fill: #46d873; }
+.kings-carta-selo {
+    -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 12px; -fx-text-fill: white; -fx-text-alignment: center;
+    -fx-background-color: rgba(200,40,40,0.9); -fx-background-radius: 4; -fx-padding: 3 7 3 7;
+    -fx-border-color: white; -fx-border-radius: 4; -fx-border-width: 1;
+}
+.kings-carta:disabled { -fx-opacity: 1; }
+.kings-carta-botao:hover { -fx-translate-y: -5; }
+/* botões da Kings ao lado de "Tática e trocas" (BotoesKings): carta secreta pequena e pênalti do presidente */
+.kings-botoes { -fx-alignment: center; }
+.kings-botao-icone {
+    -fx-background-color: -zebra; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8;
+    -fx-padding: 3 6 3 6; -fx-cursor: hand; -fx-min-height: 34; -fx-pref-height: 34; -fx-max-height: 34;
+}
+.kings-botao-icone:hover { -fx-border-color: #46d873; }
+.kings-botao-icone.pronto { -fx-border-color: #46d873; -fx-border-width: 2; }
+.kings-botao-icone:disabled { -fx-opacity: 0.55; }
+.kings-botao-rotulo { -fx-font-size: 11px; -fx-font-weight: bold; }
+.kings-presidente {
+    -fx-background-color: -zebra; -fx-background-radius: 10; -fx-padding: 8 10 8 10;
+    -fx-border-color: -linha; -fx-border-radius: 10;
+}
+.kings-presidente-usado { -fx-opacity: 0.6; }
+.kings-presidente-anel { -fx-fill: transparent; -fx-stroke: #f5c451; -fx-stroke-width: 3; }
+.kings-progresso .bar { -fx-background-color: #f5c451; -fx-background-insets: 0; -fx-background-radius: 3; }
+.kings-progresso .track { -fx-background-radius: 3; }
+.kings-seletor {
+    -fx-background-color: rgba(14,18,23,0.95); -fx-background-radius: 12; -fx-border-color: #f5c451; -fx-border-radius: 12;
+    -fx-padding: 10 14 10 14; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 22, 0.25, 0, 5);
+}
+.kings-letreiro {
+    -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 16px; -fx-text-fill: #f5c451; -fx-text-alignment: center;
+    -fx-background-color: rgba(14,18,23,0.92); -fx-background-radius: 12; -fx-padding: 10 22 10 22;
+    -fx-border-color: #4a515c; -fx-border-radius: 12;
+}
+.kings-aviso { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -acento-nav; }
+
+/* nomes que navegam (clube, jogador, técnico) */
+.link:hover { -fx-underline: true; }
+
+/* arrastar na escalação: vaga-alvo brilha pela adequação à posição */
+.vaga.alvo-bom { -fx-effect: dropshadow(gaussian, #39c47f, 24, 0.6, 0, 0); -fx-scale-x: 1.08; -fx-scale-y: 1.08; }
+.vaga.alvo-medio { -fx-effect: dropshadow(gaussian, #e3bd2e, 24, 0.6, 0, 0); -fx-scale-x: 1.08; -fx-scale-y: 1.08; }
+.vaga.alvo-ruim { -fx-effect: dropshadow(gaussian, #ff6a5c, 24, 0.6, 0, 0); -fx-scale-x: 1.08; -fx-scale-y: 1.08; }
+.table-row-cell.alvo-linha { -fx-background-color: -acento-medio; }
+.fantasma {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -acento; -fx-border-radius: 8; -fx-border-width: 1.5;
+    -fx-padding: 6 12 6 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 14, 0, 0, 4);
+}
+
+/* linha do tempo da partida: mandante à esquerda, visitante à direita */
+.evento-linha { -fx-padding: 5 14 5 14; -fx-spacing: 10; }
+.evento-meio { -fx-alignment: center; }
+.evento-min { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta2; -fx-background-color: #2f343c; -fx-background-radius: 10; -fx-padding: 1 9 1 9; }
+.evento-traco { -fx-background-color: -linha; -fx-min-height: 1; -fx-max-height: 1; }
+.evento-fase { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -tinta2; }
+.evento-lado { -fx-padding: 6 12 6 12; -fx-background-radius: 8; -fx-background-color: #272c34; -fx-max-width: 340; }
+/* cor por lado: um filete do lado do minuto (mandante azul, visitante âmbar) */
+.evento-lado.lado-casa { -fx-border-color: transparent #4f8fe6 transparent transparent; -fx-border-width: 0 3 0 0; -fx-border-radius: 0; -fx-background-radius: 8 0 0 8; }
+.evento-lado.lado-fora { -fx-border-color: transparent transparent transparent #e0a43a; -fx-border-width: 0 0 0 3; -fx-border-radius: 0; -fx-background-radius: 0 8 8 0; }
+.evento-lado.lado-casa.ev-cartao { -fx-background-color: linear-gradient(to left, #3a3626, #272c34 65%); }
+.evento-lado.lado-fora.ev-cartao { -fx-background-color: linear-gradient(to right, #3a3626, #272c34 65%); }
+.evento-lado.lado-casa.evento-vermelho { -fx-background-color: linear-gradient(to left, #43292b, #272c34 70%); }
+.evento-lado.lado-fora.evento-vermelho { -fx-background-color: linear-gradient(to right, #43292b, #272c34 70%); }
+.evento-lado.ev-substituicao .evento-nome { -fx-text-fill: #8fe3b6; }
+.evento-lado.ev-penalti .evento-detalhe { -fx-text-fill: #f5c451; -fx-font-weight: bold; }
+.evento-lado.ev-lesao .evento-detalhe, .evento-lado.ev-desfalque .evento-detalhe { -fx-text-fill: #ff9a8f; }
+.evento-lado.evento-gol { -fx-background-color: rgba(50,200,120,0.18); -fx-border-color: #39c47f; -fx-border-radius: 8; }
+.evento-lado.evento-gol-contra { -fx-background-color: rgba(240,90,80,0.18); -fx-border-color: #ff6a5c; -fx-border-radius: 8; }
+.evento-lado.evento-vermelho { -fx-background-color: rgba(240,90,80,0.12); }
+.evento-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 14px; -fx-text-fill: -tinta; }
+.evento-detalhe { -fx-font-size: 11.5px; -fx-text-fill: -tinta2; -fx-padding: 1 0 0 0; }
+.evento-gol .evento-detalhe, .evento-gol-contra .evento-detalhe { -fx-font-weight: bold; }
+
+/* zonas continentais e de acesso/queda */
+.zona-c1 { -fx-background-color: #2f6fe0; -fx-text-fill: white; }
+.zona-c1p { -fx-background-color: #8db6ff; -fx-text-fill: #0e1a33; }
+.zona-c2 { -fx-background-color: #e8892b; -fx-text-fill: #2a1500; }
+.zona-c3 { -fx-background-color: #1fb5a0; -fx-text-fill: #04201c; }
+.table-row-cell.tinta-zona-c1 { -fx-background-color: rgba(47,111,224,0.10); }
+.table-row-cell.tinta-zona-c1p { -fx-background-color: rgba(141,182,255,0.08); }
+.table-row-cell.tinta-zona-c2 { -fx-background-color: rgba(232,137,43,0.09); }
+.table-row-cell.tinta-zona-c3 { -fx-background-color: rgba(31,181,160,0.09); }
+.table-row-cell.tinta-zona-acesso { -fx-background-color: rgba(11,122,75,0.12); }
+.table-row-cell.tinta-zona-playoff { -fx-background-color: rgba(232,181,61,0.10); }
+.table-row-cell.tinta-zona-queda { -fx-background-color: rgba(200,55,45,0.11); }
+
+/* seções da lista de campeonatos */
+.list-cell.secao-lista { -fx-padding: 12 6 4 6; -fx-cursor: hand; }
+.list-cell.secao-lista:filled:selected, .list-cell.secao-lista:filled:hover { -fx-background-color: transparent; }
+.secao-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 12.5px; -fx-text-fill: -acento-nav; }
+.secao-seta { -fx-text-fill: -tinta3; -fx-font-size: 11px; }
+
+/* abas (todas as telas): faixa escura, alvo alto, sublinhado na cor do clube */
+.tab-pane > .tab-header-area { -fx-padding: 0; }
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #20242a; -fx-background-radius: 8 8 0 0; -fx-border-color: transparent transparent -linha transparent;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: transparent; -fx-padding: 9 16 9 16; -fx-min-height: 38; -fx-background-insets: 0; -fx-background-radius: 0;
+    -fx-border-color: transparent transparent transparent transparent; -fx-border-width: 0 0 3 0;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:hover { -fx-background-color: rgba(255,255,255,0.04); }
+.tab-pane > .tab-header-area > .headers-region > .tab .tab-label { -fx-text-fill: -tinta3; -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13.5px; }
+.tab-pane > .tab-header-area > .headers-region > .tab:hover .tab-label { -fx-text-fill: -tinta; }
+.tab-pane > .tab-header-area > .headers-region > .tab:selected { -fx-border-color: transparent transparent -acento-nav transparent; -fx-border-width: 0 0 3 0; -fx-background-color: rgba(255,255,255,0.03); }
+.tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label { -fx-text-fill: white; -fx-font-weight: normal; }
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button { -fx-background-color: transparent; }
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button > .arrow { -fx-background-color: -tinta2; }
+.tab-pane > .tab-content-area { -fx-padding: 14 0 0 0; }
+
+/* avançando o calendário */
+.proc-data { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 34px; -fx-text-fill: -tinta; }
+.proc-dia { -fx-font-size: 12px; -fx-text-fill: -tinta3; }
+.busca-flutuante { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha-forte; -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 22, 0, 0, 6); -fx-padding: 4; }
+.table-row-cell.linha-historica .table-cell { -fx-text-fill: -tinta2; }
+.atleta.atleta-denso { -fx-padding: 1 6 1 6; }
+.atleta.atleta-denso .label { -fx-font-size: 12.5px; }
+
+/* ------------------------------------------------------------------ partida no desenho do esboço (rodada | jogo | jogos | tabela) */
+.faixa-rodada { -fx-background-color: linear-gradient(to right, #121a22 0%, #18232e 100%); -fx-padding: 14 28 14 28; -fx-border-color: transparent transparent -acento transparent; -fx-border-width: 0 0 3 0; }
+.rodada-titulo { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 34px; -fx-text-fill: white; }
+.rodada-sub { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.65); }
+.bloco-jogo { -fx-background-color: -superficie; -fx-background-radius: 10; -fx-border-color: -linha; -fx-border-radius: 10; }
+.placar-cartao { -fx-background-radius: 10 10 0 0; -fx-padding: 18 24 12 24; }
+.placar-cartao .placar-gols { -fx-font-size: 76px; -fx-text-fill: white; }
+.placar-cartao .placar-time { -fx-font-size: 18px; }
+.fim-de-jogo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: -tinta2; -fx-alignment: center; -fx-padding: 8 0 10 0; -fx-border-color: -linha transparent transparent transparent; }
+.coluna-partida { -fx-background-color: -superficie; -fx-background-radius: 10; -fx-border-color: -linha; -fx-border-radius: 10; -fx-padding: 12 10 10 10; }
+.coluna-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: -acento-nav; -fx-padding: 0 4 0 4; }
+.jogo-linha { -fx-padding: 6 8 6 8; -fx-background-radius: 6; -fx-background-color: #2b3038; }
+.jogo-linha:hover { -fx-background-color: #323843; }
+.jogo-linha.meu { -fx-border-color: transparent transparent transparent -acento; -fx-border-width: 0 0 0 3; }
+.jogo-linha.seguido { -fx-background-color: -acento-medio; }
+.jogo-linha.jogo-gol { -fx-background-color: rgba(50,200,120,0.28); }
+.jogo-nome { -fx-font-size: 12.5px; }
+.jogo-gols { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 16px; -fx-min-width: 16; -fx-alignment: center-right; }
+.jogo-minuto { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 13px; -fx-text-fill: #39c47f; }
+.seta-sobe { -fx-text-fill: #39c47f; -fx-font-size: 9px; }
+.seta-desce { -fx-text-fill: #ff6a5c; -fx-font-size: 9px; }
+.tabela-vivo { -fx-padding: 0 4 0 4; }
+.tabela-vivo-meu { -fx-background-color: -acento-medio; -fx-background-radius: 5; }
+/* camada de trocas (intervalo, lesão, expulsão, T): quase a janela toda, com o resumo ao vivo à direita */
+.sobreposicao-trocas { -fx-padding: 14 18 14 18; }
+.sobreposicao-trocas > .caixa-sobreposta { -fx-padding: 16 20 14 20; }
+.resumo-ao-vivo .coluna-partida { -fx-padding: 10 12 10 12; }
+/* contraste (requisito: "essa tela tá muito sem contraste") */
+.sobreposicao-trocas > .caixa-sobreposta { -fx-background-color: #181b20; -fx-border-color: #4a5360; -fx-border-width: 1; -fx-border-radius: 12; }
+.sobreposicao-trocas .painel, .sobreposicao-trocas .coluna-partida { -fx-background-color: #262c34; -fx-border-color: #4a5360; }
+.sobreposicao-trocas .titulo-painel { -fx-text-fill: -tinta; }
+.sobreposicao-trocas .texto-medio { -fx-text-fill: -tinta; }
+.estat-linha { -fx-padding: 0; }
+.camada-motivo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 17px; -fx-text-fill: -tinta; }
+.estat-num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #9aa4b1; }
+.estat-num.vence { -fx-text-fill: white; }
+.estat-rotulo { -fx-font-size: 12.5px; -fx-font-weight: bold; -fx-text-fill: #dfe4ea; }
+.estat-barra { -fx-background-radius: 5; }
+.estat-barra.meu { -fx-background-color: -acento-nav; }
+.estat-barra.rival { -fx-background-color: #e6ebf1; }
+.estat-barra.perde { -fx-opacity: 0.45; }
+.estat-barra.vazia { -fx-background-color: #3a414b; -fx-opacity: 1; }
+.tabela-vivo-grande .tabela-cab { -fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #c3cad3; }
+.tabela-vivo-grande .tabela-nome { -fx-font-size: 14.5px; -fx-text-fill: #eef1f5; }
+.tabela-vivo-grande .tabela-num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 16px; -fx-text-fill: #eef1f5; }
+.tabela-vivo-grande .zona { -fx-font-size: 14px; -fx-min-width: 26; -fx-pref-width: 26; }
+.tabela-vivo-grande .pontos-destaque { -fx-font-size: 17px; -fx-min-width: 36; }
+.tabela-vivo-meu.forte { -fx-background-color: -acento; -fx-background-radius: 6; -fx-border-color: -acento-nav; -fx-border-width: 0 0 0 4; -fx-border-radius: 6 0 0 6; }
+.camada-titulo-foto { -fx-padding: 0 0 0 4; }
+.confronto-vivo { -fx-padding: 8 10 8 10; -fx-background-radius: 6; -fx-background-color: #2b3038; }
+.confronto-vivo.meu { -fx-background-color: -acento-medio; -fx-border-color: transparent transparent transparent -acento; -fx-border-width: 0 0 0 3; }
+.confronto-agregado { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 18px; -fx-min-width: 54; -fx-alignment: center; }
+.confronto-precisa { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; -fx-text-fill: -acento-nav; -fx-padding: 2 0 0 0; }
+
+/* ------------------------------------------------------------------ pré-jogo */
+.prejogo-topo { -fx-padding: 22 28 22 28; -fx-background-radius: 10; }
+.prejogo-topo .label { -fx-text-fill: white; }
+.prejogo-time { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 24px; }
+.prejogo-comp { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 18px; }
+.prejogo-fase { -fx-font-size: 13px; -fx-opacity: 0.8; }
+.prejogo-data { -fx-font-size: 12px; -fx-opacity: 0.7; }
+.prejogo-pos { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 15px; }
+.toggle-button.alternar { -fx-background-color: -superficie; -fx-border-color: -linha-forte; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: -tinta; -fx-padding: 7 14 7 14; }
+.toggle-button.alternar:selected { -fx-background-color: -acento-medio; -fx-border-color: -acento; }
+
+.info { -fx-min-width: 18; -fx-min-height: 18; -fx-max-width: 18; -fx-max-height: 18; -fx-alignment: center; -fx-background-color: #3a404a; -fx-background-radius: 9; -fx-text-fill: -tinta2; -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11px; -fx-cursor: hand; }
+.info:hover { -fx-background-color: -acento; -fx-text-fill: white; }
+
+/* páginas de entidade (clube, seleção, Kings, competição) */
+.cab-valor-medio { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: white; }
+.cab-pagina .cab-nome { -fx-font-size: 26px; }
+.cab-pagina .combo-box { -fx-background-color: rgba(255,255,255,0.14); -fx-background-radius: 5; }
+.cab-pagina .combo-box .list-cell { -fx-text-fill: white; -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 15px; }
+.abas-pagina > .tab-header-area > .headers-region > .tab { -fx-padding: 9 18 9 18; }
+.abas-pagina > .tab-header-area > .headers-region > .tab .tab-label { -fx-font-size: 14px; }
+.cabecalho .forca-texto.f1 { -fx-text-fill: #ff6a5c; }
+.cabecalho .forca-texto.f2 { -fx-text-fill: #f08a3a; }
+.cabecalho .forca-texto.f3 { -fx-text-fill: #e3bd2e; }
+.cabecalho .forca-texto.f4 { -fx-text-fill: #9ccc58; }
+.cabecalho .forca-texto.f5 { -fx-text-fill: #39c47f; }
+.cabecalho .forca-texto.f6 { -fx-text-fill: #4fdc98; }
+.cabecalho .forca-texto { -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 4, 0.4, 0, 1); }
+
+/* ================================================================== caixa de entrada (cx-) */
+.cx-filtros { -fx-spacing: 6; }
+.cx-chip { -fx-background-color: -superficie; -fx-border-color: -linha; -fx-border-radius: 14; -fx-background-radius: 14; -fx-padding: 5 12 5 12; -fx-alignment: center-left; }
+.cx-chip:hover { -fx-background-color: #30353e; }
+.cx-chip.ativo { -fx-background-color: -acento-medio; -fx-border-color: -acento; }
+.cx-chip-num { -fx-background-color: -acento; -fx-text-fill: -acento-texto; -fx-background-radius: 8; -fx-padding: 0 6 0 6; -fx-font-size: 11px; -fx-font-weight: bold; }
+.cx-busca { -fx-background-radius: 14; -fx-border-radius: 14; }
+.cx-coluna-lista .list-view.cx-lista { -fx-padding: 0; }
+.cx-lista .list-cell.cx-celula { -fx-padding: 9 12 9 4; -fx-border-color: transparent transparent -linha transparent; }
+.cx-lista .list-cell.cx-grupo-celula, .cx-lista .list-cell.cx-grupo-celula:hover, .cx-lista .list-cell.cx-grupo-celula:selected { -fx-background-color: -fundo; -fx-padding: 8 12 5 14; }
+.cx-lista .list-cell.cx-nao-lida { -fx-background-color: #2b3139; }
+.cx-lista .list-cell.cx-nao-lida:hover { -fx-background-color: #323843; }
+.cx-lista .list-cell:filled:selected, .cx-lista .list-cell:filled:selected:hover { -fx-background-color: -acento-medio; }
+.cx-grupo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.cx-marca { -fx-min-width: 3; -fx-max-width: 3; -fx-min-height: 38; -fx-background-color: -acento-nav; -fx-background-radius: 2; }
+.cx-marca-lida { -fx-min-width: 3; -fx-max-width: 3; -fx-min-height: 38; -fx-background-color: transparent; }
+.cx-remetente { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.cx-assunto { -fx-font-size: 13px; -fx-text-fill: -tinta2; }
+.cx-assunto-forte { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: -tinta; }
+.cx-previa { -fx-font-size: 11.5px; -fx-text-fill: -tinta3; }
+.cx-data { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.cx-simbolo-fundo { -fx-background-color: #3a404a; -fx-background-radius: 50; }
+.cx-simbolo { -fx-text-fill: -tinta; -fx-font-family: "FUTEBAS Titulo"; }
+.cx-leitura { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; }
+.cx-leitura-cabeca { -fx-padding: 16 20 14 20; -fx-border-color: transparent transparent -linha transparent; }
+.cx-leitura-remetente { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; }
+.cx-leitura-rolar, .cx-leitura-rolar > .viewport { -fx-background-color: transparent; }
+.cx-leitura-corpo { -fx-padding: 20 24 24 24; }
+.cx-leitura-assunto { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 20px; -fx-text-fill: -tinta; }
+.cx-leitura-texto { -fx-font-size: 14px; -fx-text-fill: -tinta2; -fx-line-spacing: 3; }
+.cx-anexo { -fx-background-color: #2b3038; -fx-background-radius: 8; -fx-border-color: transparent transparent transparent -acento; -fx-border-width: 0 0 0 3; -fx-padding: 14 16 14 16; -fx-alignment: center-left; }
+.cx-anexo-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 16px; }
+.cx-seta { -fx-text-fill: -tinta3; -fx-font-size: 15px; }
+.cx-acoes { -fx-padding: 4 0 0 0; }
+
+/* ================================================================== transferências (tr-) */
+.tr-faixa { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; }
+.tr-faixa-bloco { -fx-padding: 12 18 12 18; -fx-border-color: transparent -linha transparent transparent; }
+.tr-faixa-rotulo { -fx-font-size: 10.5px; -fx-text-fill: -tinta3; -fx-font-family: "FUTEBAS Titulo"; }
+.tr-faixa-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 20px; }
+.tr-chip { -fx-padding: 3 9 3 9; }
+.tr-cartao { -fx-background-color: #2b3038; -fx-background-radius: 8; -fx-padding: 12 14 12 14; -fx-border-color: transparent transparent transparent -ambar; -fx-border-width: 0 0 0 3; }
+.tr-dias { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 34px; }
+.tr-barra { -fx-pref-height: 8; }
+.tr-barra > .bar { -fx-background-color: -acento; -fx-background-insets: 0; -fx-background-radius: 4; }
+.tr-barra > .track { -fx-background-color: #353a43; -fx-background-radius: 4; }
+.tr-chega { -fx-text-fill: #3ac47f; -fx-font-size: 16px; -fx-font-weight: bold; }
+.tr-sai { -fx-text-fill: #ff9288; -fx-font-size: 16px; -fx-font-weight: bold; }
+
+/* ================================================================== finanças (fin-) */
+.fin-tabela { -fx-hgap: 14; -fx-vgap: 7; }
+.fin-cab { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 10.5px; -fx-text-fill: -tinta3; }
+.fin-secao { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 14px; -fx-text-fill: -tinta; -fx-padding: 6 0 0 0; }
+.fin-subtotal { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 15px; -fx-padding: 6 0 0 0; }
+.fin-receita-texto { -fx-text-fill: #3ac47f; }
+.fin-despesa-texto { -fx-text-fill: #ff8a80; }
+.fin-item { -fx-text-fill: -tinta2; }
+.fin-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; }
+.fin-valor-ant { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta3; }
+.fin-var { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 13px; }
+.fin-pct { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.fin-trilho { -fx-background-color: #353a43; -fx-background-radius: 4; }
+.fin-barra { -fx-background-radius: 4; }
+.fin-barra.fin-receita { -fx-background-color: #2fa86b; }
+.fin-barra.fin-despesa { -fx-background-color: #d0544a; }
+.fin-linha-total { -fx-background-color: #2b3038; -fx-background-radius: 6; -fx-min-height: 34; }
+.fin-total-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-padding: 0 0 0 10; }
+.fin-total { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 18px; }
+.fin-pilha { -fx-background-color: #353a43; -fx-background-radius: 4; -fx-pref-height: 14; -fx-min-height: 14; -fx-max-height: 14; }
+.fin-r0 { -fx-background-color: #1f8f57; }
+.fin-r1 { -fx-background-color: #2fb36f; }
+.fin-r2 { -fx-background-color: #5fcf93; }
+.fin-r3 { -fx-background-color: #8fe0b4; }
+.fin-r4 { -fx-background-color: #b9ecd0; }
+.fin-d0 { -fx-background-color: #b8433a; }
+.fin-d1 { -fx-background-color: #d9665c; }
+.fin-d2 { -fx-background-color: #e88d84; }
+.fin-d3 { -fx-background-color: #f2b4ae; }
+.fin-uso { -fx-pref-height: 10; }
+.fin-uso > .track { -fx-background-color: #353a43; -fx-background-radius: 5; }
+.fin-uso > .bar { -fx-background-color: #2fa86b; -fx-background-insets: 0; -fx-background-radius: 5; }
+.fin-uso.fin-uso-alerta > .bar { -fx-background-color: #d9a21c; }
+.fin-uso.fin-uso-estouro > .bar { -fx-background-color: #d0544a; }
+.fin-proj-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 22px; }
+.fin-leg-real { -fx-background-color: #3ac47f; }
+.fin-leg-proj { -fx-background-color: #b7bfca; }
+
+/* ================================================================== Kings League (kg-) */
+.kg-meu-chip { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 6 12 6 8; }
+.kg-nav-rolar, .kg-nav-rolar > .viewport { -fx-background-color: transparent; }
+.kg-nav { -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 6; }
+.kg-nav-grupo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11px; -fx-text-fill: -tinta3; -fx-padding: 10 8 4 8; }
+.kg-nav-item { -fx-padding: 7 10 7 8; -fx-background-radius: 6; -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 0 0 0 3; }
+.kg-nav-item:hover { -fx-background-color: #30353e; }
+.kg-nav-item.ativo { -fx-background-color: -acento-medio; -fx-border-color: transparent transparent transparent -acento-nav; }
+.kg-nav-nome { -fx-font-size: 13px; }
+.kg-faixa { -fx-background-color: linear-gradient(to right, #2b3038 0%, #262a31 100%); -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 14 18 14 18; }
+.kg-liga-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 22px; }
+.kg-rotulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 10.5px; -fx-text-fill: -tinta3; }
+.kg-seg { -fx-background-color: -superficie; -fx-border-color: -linha; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 6 14 6 10; -fx-cursor: hand; }
+.kg-seg:hover { -fx-background-color: #30353e; }
+.kg-seg.ativo { -fx-background-color: -acento-medio; -fx-border-color: -acento; }
+.kg-seg-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 13px; }
+.kg-comp-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 18px; }
+.kg-vagas { -fx-border-color: transparent transparent transparent -acento; -fx-border-width: 0 0 0 3; }
+
+/* ------------------------------------------------------------------ Opções (TelaOpcoes) */
+.pref-caixa {
+    -fx-background-color: -fundo; -fx-background-radius: 12; -fx-border-color: -linha; -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 30, 0, 0, 8);
+}
+.pref-topo { -fx-padding: 18 24 14 24; -fx-border-color: transparent transparent -linha transparent; }
+.pref-nav {
+    -fx-background-color: -nav-fundo; -fx-pref-width: 200; -fx-min-width: 200; -fx-padding: 14 10 14 10;
+    -fx-background-radius: 0 0 0 12;
+}
+.pref-rolagem, .pref-rolagem > .viewport { -fx-background-color: transparent; -fx-background: -fundo; }
+.pref-conteudo { -fx-padding: 18 28 24 28; }
+.pref-secao { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 18px; -fx-text-fill: -tinta; -fx-padding: 0 0 4 0; }
+.pref-grupo {
+    -fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: -acento-nav; -fx-padding: 16 0 6 0;
+    -fx-border-color: transparent transparent -linha transparent; -fx-border-width: 0 0 1 0;
+}
+.pref-linha {
+    -fx-min-height: 44; -fx-pref-height: 44; -fx-max-height: 44; -fx-padding: 0 4 0 4;
+    -fx-border-color: transparent transparent #2c3139 transparent; -fx-border-width: 0 0 1 0;
+}
+.pref-linha:hover { -fx-background-color: rgba(255,255,255,0.025); }
+.pref-rotulo { -fx-font-size: 13px; -fx-text-fill: -tinta; }
+.pref-sub { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.pref-rodape { -fx-padding: 12 24 14 24; -fx-border-color: -linha transparent transparent transparent; }
+.pref-segmentos .toggle-button { -fx-padding: 5 12 5 12; -fx-min-width: 56; }
+.chave-trilho { -fx-background-color: #3a404a; -fx-background-radius: 11; -fx-border-color: #4a515c; -fx-border-radius: 11; }
+.chave-bola { -fx-fill: #c9d0d9; }
+.chave:selected .chave-trilho { -fx-background-color: -acento; -fx-border-color: -acento; }
+.chave:selected .chave-bola { -fx-fill: white; }
+.chave:hover .chave-trilho { -fx-border-color: #6a7380; }
+
+/* ------------------------------------------------------------------ início (ini-): fundo abstrato, campo luminoso */
+/* tamanhos em em: a TelaInicio ajusta -fx-font-size da coluna à altura da janela */
+.ini { -fx-background-color: #03070a; -ini-clube: -acento-nav; }
+.ini-veu { -fx-background-color: linear-gradient(to right, rgba(3,8,9,0.93) 0%, rgba(3,8,9,0.90) 22%, rgba(3,8,9,0.80) 30%, rgba(3,8,9,0.62) 37%, rgba(3,8,9,0.40) 44%, rgba(3,8,9,0.21) 51%, rgba(3,8,9,0.08) 58%, rgba(3,8,9,0) 66%); }
+.ini-cabeca { -fx-spacing: 1.2em; }
+.ini-marca {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 6.6em; -fx-text-fill: #f3f5f1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 18, 0.2, 0, 3);
+    -fx-padding: 0 0 -0.12em 0;
+}
+.ini-edicao { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 1.25em; -fx-text-fill: #f6c430; -fx-padding: 0 0 0 0.25em; }
+.ini-menu { -fx-spacing: 0.25em; }
+.ini-intervalo { -fx-min-height: 2.6em; -fx-pref-height: 2.6em; }
+.ini-item-linha { -fx-spacing: 0.9em; }
+
+.ini-item {
+    -fx-background-color: transparent; -fx-background-radius: 0.4em; -fx-padding: 0.55em 0.9em 0.55em 0;
+    -fx-cursor: hand; -fx-alignment: center-left; -fx-max-width: infinity;
+}
+.ini-item-barra { -fx-min-width: 0.3em; -fx-pref-width: 0.3em; -fx-max-width: 0.3em; -fx-pref-height: 1.9em; -fx-background-radius: 0.15em; -fx-background-color: transparent; }
+.ini-item > HBox { -fx-spacing: 1.0em; }
+.ini-item-texto { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 2.35em; -fx-text-fill: rgba(240,244,240,0.72); }
+.ini-item-sub { -fx-font-size: 1em; -fx-text-fill: rgba(220,228,224,0.5); }
+.ini-item:hover, .ini-item:focused {
+    -fx-background-color: linear-gradient(to right, rgba(255,255,255,0.075), rgba(255,255,255,0));
+}
+.ini-item:hover .ini-item-barra, .ini-item:focused .ini-item-barra { -fx-background-color: #f6c430; }
+.ini-item:hover .ini-item-texto, .ini-item:focused .ini-item-texto { -fx-text-fill: white; }
+.ini-item:hover .ini-item-sub, .ini-item:focused .ini-item-sub { -fx-text-fill: rgba(235,240,236,0.8); }
+
+.ini-cartao {
+    -fx-background-color: rgba(9,16,14,0.78); -fx-background-radius: 0.6em;
+    -fx-border-color: transparent transparent transparent -ini-clube; -fx-border-width: 0 0 0 0.3em; -fx-border-radius: 0.6em 0 0 0.6em;
+    -fx-padding: 0.95em 1.2em 1.05em 1.1em; -fx-cursor: hand; -fx-max-width: infinity;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 22, 0, 0, 6);
+}
+.ini-cartao:hover, .ini-cartao:focused { -fx-background-color: rgba(18,30,26,0.9), linear-gradient(to right, rgba(255,255,255,0.06), rgba(255,255,255,0)); }
+.ini-cartao-conteudo { -fx-spacing: 0.65em; }
+.ini-cartao-acao { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 1.55em; -fx-text-fill: #f6c430; }
+.ini-cartao-salvo { -fx-font-size: 0.9em; -fx-text-fill: rgba(220,228,224,0.45); }
+.ini-cartao-corpo { -fx-spacing: 1em; }
+.ini-cartao-textos { -fx-spacing: 0.1em; }
+.ini-cartao-clube { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 1.75em; -fx-text-fill: white; }
+.ini-cartao-meta { -fx-font-size: 1em; -fx-text-fill: rgba(225,232,228,0.72); }
+.ini-cartao:hover .ini-cartao-acao, .ini-cartao:focused .ini-cartao-acao { -fx-text-fill: #ffd75e; }
+
+.ini-rodape { -fx-padding: 0 22 16 0; }
+.ini-versao { -fx-font-size: 11px; -fx-text-fill: rgba(220,228,224,0.38); }
+.ini-erro { -fx-font-size: 11px; -fx-text-fill: #ff6a5c; }
+
+/* energia (Brasfoot): barra e número; verde inteiro, amarelo, laranja, vermelho cansado */
+.energia-trilha { -fx-background-color: rgba(0,0,0,0.38); -fx-background-radius: 3; }
+.energia-cheia { -fx-background-radius: 3; }
+.energia-cheia.energia-alta { -fx-background-color: #39c47f; }
+.energia-cheia.energia-media { -fx-background-color: #e3bd2e; }
+.energia-cheia.energia-baixa { -fx-background-color: #f08a2c; }
+.energia-cheia.energia-critica { -fx-background-color: #ff5a4c; }
+.energia-num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11px; }
+.energia-num.energia-alta { -fx-text-fill: #39c47f; }
+.energia-num.energia-media { -fx-text-fill: #e3bd2e; }
+.energia-num.energia-baixa { -fx-text-fill: #f08a2c; }
+.energia-num.energia-critica { -fx-text-fill: #ff5a4c; }
+.campo .energia-num { -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 3, 0.6, 0, 0); }
+
+/* gol na linha do tempo (requisito): sem caixa, bola + "GOL DO TIME!!" grande em negrito itálico, autor e assistência menores */
+.gol-lado { -fx-padding: 6 10 6 10; -fx-background-radius: 10; }
+/* o gol: sem borda, só um brilho suave vindo do lado do minuto */
+.gol-lado.lado-casa { -fx-background-color: linear-gradient(to left, rgba(245,196,81,0.10), transparent); }
+.gol-lado.lado-fora { -fx-background-color: linear-gradient(to right, rgba(245,196,81,0.10), transparent); }
+.linha-gol { -fx-padding: 8 14 8 14; }
+.gol-titulo { -fx-font-family: "Arial"; -fx-font-size: 19px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: -tinta; }
+.gol-titulo.gol-meu { -fx-text-fill: #39c47f; }
+.gol-titulo.gol-sofrido { -fx-text-fill: #ff6a5c; }
+.gol-autor { -fx-font-size: 12.5px; -fx-font-weight: bold; -fx-text-fill: -tinta; }
+.gol-assist { -fx-font-size: 11.5px; -fx-text-fill: -tinta2; }
+
+/* cartãozinho no canto da foto (campo da escalação / troca ao vivo) */
+.cartao-mini { -fx-background-radius: 2; -fx-border-radius: 2; -fx-border-color: rgba(0,0,0,0.55); -fx-border-width: 0.8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 3, 0.3, 0, 1); }
+.cartao-mini-amarelo { -fx-background-color: #f5c400; }
+.cartao-mini-vermelho { -fx-background-color: #e0262a; }
+
+/* pré-jogo: ações no meio, entre os desfalques */
+.prejogo-acoes { -fx-padding: 14; -fx-spacing: 10; }
+.button.jogar-grande.prejogo-jogar { -fx-pref-height: 54; -fx-font-size: 20px; -fx-background-radius: 8; }
+.prejogo-acoes .prejogo-botao { -fx-pref-height: 38; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 7; -fx-border-radius: 7; }
+.prejogo-acoes .prejogo-botao.alternar:selected { -fx-background-color: -acento; -fx-text-fill: white; -fx-border-color: -acento; }
+
+/* lesionado: destaque avermelhado e o "+" de médico */
+.cruz-medica { -fx-background-color: white; -fx-background-radius: 2; -fx-border-color: rgba(0,0,0,0.35); -fx-border-radius: 2; -fx-border-width: 0.6; }
+.cruz-medica-traco { -fx-fill: #d8262a; }
+.vaga.lesionado .vaga-placa { -fx-background-color: linear-gradient(to bottom, rgba(84,26,24,0.96), rgba(46,14,13,0.96)); -fx-border-color: rgba(255,106,92,0.9); }
+.vaga.lesionado .foto-aro { -fx-effect: dropshadow(gaussian, rgba(255,80,70,0.9), 9, 0.4, 0, 0); }
+.atleta.lesionado, .jogo-linha.lesionado { -fx-background-color: rgba(240,90,80,0.14); }
+
+/* rodapé da partida (requisito: "melhore esses botões") — mesma linguagem do cartão de ações do pré-jogo */
+.rodape-partida.rodape-jogo { -fx-padding: 12 20 12 20; -fx-spacing: 12; -fx-min-height: 64; -fx-background-color: #20242a; }
+.rodape-jogo .rotulo-rodape { -fx-font-size: 12px; -fx-text-fill: -tinta2; -fx-font-weight: bold; }
+.vel-pilula { -fx-background-color: #15181c; -fx-background-radius: 20; -fx-border-color: #3a404a; -fx-border-radius: 20; -fx-padding: 3; -fx-spacing: 2; }
+.vel-pilula .toggle-button.vel-opcao {
+    -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: -tinta2;
+    -fx-background-radius: 16; -fx-border-radius: 16; -fx-pref-height: 32; -fx-min-height: 32; -fx-padding: 0 14 0 14;
+    -fx-font-size: 12.5px; -fx-font-weight: bold;
+}
+.vel-pilula .toggle-button.vel-opcao:hover { -fx-background-color: #2c313a; -fx-text-fill: white; }
+.vel-pilula .toggle-button.vel-opcao:selected { -fx-background-color: -acento; -fx-text-fill: -acento-texto; }
+.vel-pilula .toggle-button.vel-opcao:disabled { -fx-opacity: 0.4; }
+.rodape-jogo .button.rodape-botao {
+    -fx-pref-height: 38; -fx-min-height: 38; -fx-padding: 0 16 0 16; -fx-font-size: 13px; -fx-font-weight: bold;
+    -fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #2f343d; -fx-border-color: #4a515c; -fx-text-fill: -tinta;
+    -fx-graphic-text-gap: 8;
+}
+.rodape-jogo .button.rodape-botao:hover { -fx-background-color: #3a404b; -fx-border-color: #6a727e; }
+.rodape-jogo .button.rodape-botao.rodape-forte { -fx-background-color: #e9edf2; -fx-border-color: #e9edf2; -fx-text-fill: #14181d; }
+.rodape-jogo .button.rodape-botao.rodape-forte:hover { -fx-background-color: white; -fx-border-color: white; }
+.rodape-jogo .button.rodape-botao.rodape-forte .icone-rodape { -fx-fill: #14181d; }
+.rodape-jogo .button.rodape-botao.primario { -fx-background-color: -acento; -fx-border-color: -acento; -fx-text-fill: -acento-texto; -fx-padding: 0 22 0 22; }
+.rodape-jogo .button.rodape-botao.primario:hover { -fx-background-color: -acento-hover; -fx-border-color: -acento-hover; }
+.rodape-jogo .button.rodape-botao:disabled { -fx-opacity: 0.38; }
+.icone-rodape { -fx-fill: -tinta; }
+.icone-rodape-texto { -fx-font-size: 15px; -fx-text-fill: -tinta; -fx-font-weight: bold; }
+
+/* suspense do pênalti: letreiro no jogo e painel da disputa */
+.suspense-faixa {
+    -fx-background-color: rgba(14,18,23,0.94); -fx-background-radius: 14; -fx-border-color: #4a515c; -fx-border-radius: 14;
+    -fx-padding: 22 34 22 34; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 28, 0.25, 0, 6);
+}
+.suspense-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 15px; -fx-text-fill: #f5c451; }
+.suspense-passo { -fx-font-family: "Arial"; -fx-font-size: 26px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: white; }
+.suspense-gol { -fx-font-family: "Arial"; -fx-font-size: 30px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: #39c47f; }
+.suspense-erro { -fx-font-family: "Arial"; -fx-font-size: 30px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: #ff6a5c; }
+.suspense-placar { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 40px; -fx-text-fill: white; }
+.suspense-time { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: -tinta; }
+.suspense-morte { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 12px; -fx-text-fill: #ff6a5c; -fx-background-color: rgba(255,106,92,0.14); -fx-background-radius: 10; -fx-padding: 2 10 2 10; }
+.pen-bola { -fx-stroke: rgba(0,0,0,0.5); -fx-stroke-width: 1; }
+.pen-bola.pen-pendente { -fx-fill: #4a515c; }
+.pen-bola.pen-gol { -fx-fill: #39c47f; }
+.pen-bola.pen-erro { -fx-fill: #ff5a4c; }
+.pen-bola.pen-vez { -fx-stroke: white; -fx-stroke-width: 2; }
+
+/* chance que não foi gol: uma linha, mais discreta que o gol */
+.linha-chance { -fx-padding: 2 14 2 14; }
+.chance-texto { -fx-font-size: 12px; -fx-text-fill: -tinta2; -fx-font-style: italic; }
+.chance-texto.chance-minha { -fx-text-fill: #cfd6df; }
+.chance-texto.chance-deles { -fx-text-fill: #a9b1bc; }
+.chance-min { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 11.5px; -fx-text-fill: -tinta3; }
+
+/* ===================================================================== caixas de seleção (todas as telas)
+   Visual único para ComboBox, ChoiceBox e Spinner: cantos arredondados, altura confortável,
+   seta em "chevron", realce suave no hover/foco e lista suspensa com sombra. */
+.combo-box, .choice-box, .spinner {
+    -fx-background-color: linear-gradient(to bottom, #30353e, #2a2f37);
+    -fx-background-radius: 8; -fx-border-radius: 8;
+    -fx-border-color: #3d434d; -fx-border-width: 1;
+    -fx-min-height: 32; -fx-pref-height: 32;
+    -fx-padding: 0 2 0 4;
+    -fx-cursor: hand;
+}
+.combo-box:hover, .choice-box:hover, .spinner:hover { -fx-border-color: #59616d; -fx-background-color: linear-gradient(to bottom, #353b45, #2e333c); }
+.combo-box:focused, .choice-box:focused, .spinner:focused, .combo-box:showing {
+    -fx-border-color: -acento; -fx-effect: dropshadow(gaussian, -acento, 6, 0.1, 0, 0);
+}
+.combo-box:disabled, .choice-box:disabled, .spinner:disabled { -fx-opacity: 0.45; }
+.combo-box .list-cell { -fx-text-fill: -tinta; -fx-font-size: 13px; -fx-padding: 0 6 0 8; -fx-background-color: transparent; }
+/* seta: chevron fino no lugar do triângulo, com um separador discreto */
+.combo-box .arrow-button, .choice-box .open-button {
+    -fx-background-color: transparent; -fx-padding: 0 10 0 8;
+    -fx-border-color: transparent transparent transparent #3d434d; -fx-border-width: 0 0 0 1;
+}
+.combo-box .arrow, .choice-box .open-button .arrow {
+    -fx-background-color: -tinta2;
+    -fx-shape: "M 0 0 L 5 5 L 10 0 L 8.6 0 L 5 3.6 L 1.4 0 Z";
+    -fx-pref-width: 10; -fx-pref-height: 6; -fx-min-width: 10; -fx-min-height: 6; -fx-max-width: 10; -fx-max-height: 6;
+}
+.combo-box:hover .arrow, .combo-box:showing .arrow, .choice-box:hover .open-button .arrow { -fx-background-color: -tinta; }
+.combo-box:showing .arrow { -fx-rotate: 180; }
+/* lista suspensa */
+.combo-box-popup .list-view, .choice-box .context-menu {
+    -fx-background-color: #2b3038; -fx-background-radius: 8; -fx-border-radius: 8;
+    -fx-border-color: #454c57; -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 16, 0.1, 0, 6);
+}
+.combo-box-popup .list-cell { -fx-padding: 7 12 7 12; -fx-background-radius: 6; -fx-text-fill: -tinta; -fx-background-color: transparent; }
+.combo-box-popup .list-cell:hover { -fx-background-color: #363c46; }
+.combo-box-popup .list-cell:selected, .combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: -acento-medio; -fx-text-fill: white; -fx-font-weight: bold;
+}
+.choice-box .context-menu .menu-item { -fx-padding: 6 12 6 12; -fx-background-radius: 6; }
+.choice-box .context-menu .menu-item:focused { -fx-background-color: #363c46; }
+/* spinner: botões de subir/descer discretos */
+.spinner .text-field { -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0 6 0 8; }
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button { -fx-background-color: transparent; -fx-padding: 3 8 3 8; }
+.spinner .increment-arrow-button:hover, .spinner .decrement-arrow-button:hover { -fx-background-color: #3a404a; }
+.spinner .increment-arrow, .spinner .decrement-arrow { -fx-background-color: -tinta2; }
+/* no cabeçalho colorido das páginas a caixa continua translúcida */
+.cab-pagina .combo-box { -fx-background-color: rgba(255,255,255,0.14); -fx-border-color: rgba(255,255,255,0.22); }
+.cab-pagina .combo-box .arrow { -fx-background-color: white; }
+
+/* ===================================================================== pontos em destaque nas tabelas
+   Regra do jogo: em qualquer tabela (futebol ou Kings) os pontos são o número mais importante. */
+.table-view .table-cell.num-forte {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;
+    -fx-alignment: center; -fx-background-color: rgba(255,255,255,0.055);
+}
+.table-row-cell:selected .table-cell.num-forte { -fx-background-color: rgba(255,255,255,0.12); -fx-text-fill: white; }
+.table-view .column-header.col-pontos { -fx-background-color: rgba(255,255,255,0.07); }
+.table-view .column-header.col-pontos .label { -fx-text-fill: -tinta; -fx-font-weight: bold; -fx-font-size: 13px; }
+/* mini tabelas (próximo jogo, ao vivo, sub-20): pontos numa pastilha */
+.pontos-destaque {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;
+    -fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 5;
+    -fx-padding: 1 7 1 7; -fx-min-width: 30; -fx-alignment: center;
+}
+
+/* ===================================================================== botões com relevo (todas as telas)
+   Regra do jogo: botões um pouco maiores e com relevo — degradê, brilho em cima e sombra embaixo;
+   ao apertar, "afundam". */
+.button {
+    -fx-background-color: rgba(0,0,0,0.38), linear-gradient(to bottom, #3a404a 0%, #2c3139 100%), linear-gradient(to bottom, rgba(255,255,255,0.09), rgba(255,255,255,0) 55%);
+    -fx-background-insets: 0 0 -2 0, 0, 1;
+    -fx-background-radius: 7, 7, 6;
+    -fx-border-color: #454c57; -fx-border-radius: 7;
+    -fx-padding: 7 16 7 16; -fx-font-size: 13px;
+}
+.button:hover {
+    -fx-background-color: rgba(0,0,0,0.38), linear-gradient(to bottom, #444b56 0%, #333841 100%), linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0) 55%);
+    -fx-border-color: #636c79;
+}
+.button:pressed {
+    -fx-background-color: rgba(0,0,0,0.38), linear-gradient(to bottom, #262a31 0%, #2f343c 100%), transparent;
+    -fx-background-insets: 0, 0, 1; -fx-translate-y: 1;
+}
+.button.primario, .button.jogar-grande, .cabecalho .jogar {
+    -fx-background-color: rgba(0,0,0,0.42), linear-gradient(to bottom, derive(-acento, 22%) 0%, -acento 100%), linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0) 50%);
+    -fx-background-insets: 0 0 -2 0, 0, 1;
+    -fx-background-radius: 8, 8, 7;
+    -fx-border-color: derive(-acento, -18%); -fx-border-radius: 8;
+}
+.button.primario:hover, .button.jogar-grande:hover, .cabecalho .jogar:hover {
+    -fx-background-color: rgba(0,0,0,0.42), linear-gradient(to bottom, derive(-acento, 34%) 0%, derive(-acento, 6%) 100%), linear-gradient(to bottom, rgba(255,255,255,0.22), rgba(255,255,255,0) 50%);
+}
+.button.primario:pressed, .button.jogar-grande:pressed, .cabecalho .jogar:pressed {
+    -fx-background-color: rgba(0,0,0,0.42), linear-gradient(to bottom, derive(-acento, -12%) 0%, -acento 100%), transparent;
+    -fx-background-insets: 0, 0, 1; -fx-translate-y: 1;
+}
+/* os "fantasmas" e chips continuam planos */
+.button.fantasma { -fx-background-color: transparent; -fx-background-insets: 0; -fx-border-color: transparent; }
+.button.fantasma:hover { -fx-background-color: #343943; -fx-background-insets: 0; }
+/* cabeçalho: tudo um pouco maior */
+.cabecalho .button { -fx-min-height: 38; -fx-padding: 8 18 8 18; -fx-font-size: 13.5px; }
+.cabecalho .jogar { -fx-padding: 8 22 8 14; -fx-min-height: 50; }
+.cabecalho .jogar .jogar-texto { -fx-font-size: 21px; }
+.cabecalho .text-field.busca { -fx-min-height: 36; -fx-pref-height: 36; -fx-font-size: 13px; -fx-background-radius: 18; -fx-border-radius: 18; }
+
+/* ===================================================================== calendário: nomes e resultado em destaque */
+.table-view.calendario .table-row-cell { -fx-cell-size: 36; }
+.table-view.calendario .table-cell { -fx-font-size: 14px; -fx-text-fill: -tinta; }
+.table-view.calendario .table-cell .label { -fx-font-size: 14px; -fx-text-fill: -tinta; }
+.table-view.calendario .table-cell .label.texto-pequeno { -fx-font-size: 12px; -fx-text-fill: -tinta2; }
+.table-view.calendario .table-cell .label.link { -fx-font-weight: bold; }
+.cal-placar { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: white; }
+.table-view.calendario .table-cell .label.cal-placar { -fx-font-size: 17px; }
+.cal-placar.cal-v, .table-view.calendario .table-cell .label.cal-placar.cal-v { -fx-text-fill: #4fd690; }
+.cal-placar.cal-d, .table-view.calendario .table-cell .label.cal-placar.cal-d { -fx-text-fill: #ff7468; }
+.cal-placar.cal-e, .table-view.calendario .table-cell .label.cal-placar.cal-e { -fx-text-fill: #d6dbe2; }
+.cal-resultado {
+    -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11.5px; -fx-font-weight: bold; -fx-text-fill: white;
+    -fx-padding: 3 9 3 9; -fx-background-radius: 5; -fx-alignment: center; -fx-min-width: 74;
+}
+.table-view.calendario .table-cell .label.cal-resultado { -fx-font-size: 11.5px; -fx-text-fill: white; }
+.cal-resultado.cal-v { -fx-background-color: #1f9d5c; }
+.cal-resultado.cal-d { -fx-background-color: #c8372d; }
+.cal-resultado.cal-e { -fx-background-color: #5b6370; }
+.filtro-icone { -fx-text-fill: -acento-nav; -fx-font-size: 12px; -fx-font-weight: bold; -fx-alignment: center; }
+
+/* ===================================================================== página inicial: manchetes compactas e quadros
+   Regra do jogo: poucas notícias (as relevantes primeiro) e as três colunas terminam juntas. */
+.hub-noticia { -fx-padding: 7 6 7 4; -fx-border-color: transparent transparent #30353d transparent; -fx-background-radius: 6; }
+.hub-noticia:hover { -fx-background-color: #2c3139; }
+.hub-noticia-titulo { -fx-font-size: 13px; -fx-text-fill: -tinta2; }
+.hub-noticia-titulo.forte { -fx-font-weight: bold; -fx-text-fill: -tinta; }
+.hub-noticia-fina { -fx-font-size: 11.5px; -fx-text-fill: -tinta3; }
+.hub-noticia .etiqueta { -fx-translate-y: 1; }
+.hub-noticia .manchete-data { -fx-translate-y: 1; }
+.hub-placar { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; }
+.hub-kpi { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 16px; -fx-text-fill: -tinta; }
+.hub-kpi.positivo { -fx-text-fill: #3ac47f; }
+.hub-kpi.negativo { -fx-text-fill: #ff7468; }
+
+/* ===================================================================== caixa de entrada: barra do topo
+   Uma barra só: ícone, título com o selo de não lidas, busca com lupa e "Marcar todas como lidas";
+   embaixo o controle segmentado (Todas | Não lidas) e as categorias. Alturas de 34 px. */
+.cx-topo {
+    -fx-background-color: -superficie; -fx-background-radius: 10;
+    -fx-border-color: -linha; -fx-border-radius: 10;
+}
+.cx-topo-linha { -fx-padding: 12 16 12 14; -fx-border-color: transparent transparent -linha transparent; }
+.cx-topo .cx-filtros { -fx-padding: 10 16 10 14; -fx-spacing: 10; }
+.cx-topo-icone-fundo {
+    -fx-background-color: linear-gradient(to bottom, derive(-acento, 18%), -acento); -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 6, 0, 0, 2);
+}
+.cx-topo-icone { -fx-fill: white; }
+.cx-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 20px; -fx-text-fill: -tinta; }
+.cx-sub { -fx-font-size: 12px; -fx-text-fill: -tinta3; }
+.cx-selo {
+    -fx-background-color: -acento; -fx-text-fill: -acento-texto; -fx-font-size: 11.5px; -fx-font-weight: bold;
+    -fx-background-radius: 10; -fx-padding: 2 9 2 9;
+}
+/* busca: arredondada, lupa à esquerda, mesma altura dos botões */
+.text-field.cx-busca {
+    -fx-min-height: 34; -fx-pref-height: 34; -fx-max-height: 34;
+    -fx-background-color: #20242a; -fx-background-radius: 17; -fx-border-radius: 17; -fx-border-color: #3d434d;
+    -fx-padding: 0 30 0 34; -fx-font-size: 13px;
+}
+.text-field.cx-busca:hover { -fx-border-color: #59616d; }
+.text-field.cx-busca:focused { -fx-border-color: -acento; -fx-background-color: #1d2126; }
+.cx-busca-icone { -fx-fill: -tinta3; }
+.cx-busca-limpar { -fx-text-fill: -tinta3; -fx-font-size: 11px; -fx-padding: 3 5 3 5; -fx-background-radius: 10; }
+.cx-busca-limpar:hover { -fx-text-fill: -tinta; -fx-background-color: #3a404a; }
+/* ação secundária com ícone */
+.button.cx-botao { -fx-min-height: 34; -fx-pref-height: 34; -fx-padding: 0 14 0 12; -fx-font-size: 12.5px; -fx-text-fill: -tinta; }
+.cx-botao-icone { -fx-fill: -acento-nav; }
+.button.cx-botao:disabled { -fx-opacity: 0.5; }
+/* controle segmentado */
+.cx-segmento {
+    -fx-background-color: #1d2126; -fx-background-radius: 9; -fx-border-color: #3a404a; -fx-border-radius: 9;
+    -fx-padding: 3; -fx-min-height: 34; -fx-pref-height: 34; -fx-max-height: 34;
+}
+.cx-seg { -fx-padding: 0 14 0 14; -fx-background-radius: 6; -fx-alignment: center; -fx-min-height: 26; }
+.cx-seg .cx-chip-nome { -fx-text-fill: -tinta2; -fx-font-size: 12.5px; }
+.cx-seg:hover { -fx-background-color: #2c3139; }
+.cx-seg.ativo {
+    -fx-background-color: linear-gradient(to bottom, #3c434e, #323842);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 4, 0, 0, 1);
+}
+.cx-seg.ativo .cx-chip-nome { -fx-text-fill: white; -fx-font-weight: bold; }
+/* categorias: pílulas da mesma altura */
+.cx-topo .cx-chip {
+    -fx-min-height: 30; -fx-pref-height: 30; -fx-padding: 0 8 0 12; -fx-alignment: center-left;
+    -fx-background-color: transparent; -fx-border-color: #3d434d; -fx-background-radius: 15; -fx-border-radius: 15;
+}
+.cx-topo .cx-chip .cx-chip-nome { -fx-text-fill: -tinta2; -fx-font-size: 12.5px; }
+.cx-topo .cx-chip:hover { -fx-background-color: #2c3139; -fx-border-color: #59616d; }
+.cx-topo .cx-chip.ativo { -fx-background-color: -acento-medio; -fx-border-color: -acento; }
+.cx-topo .cx-chip.ativo .cx-chip-nome { -fx-text-fill: white; -fx-font-weight: bold; }
+.cx-chip-total {
+    -fx-background-color: #353b45; -fx-text-fill: -tinta3; -fx-background-radius: 8; -fx-padding: 0 6 0 6;
+    -fx-font-size: 11px; -fx-font-weight: bold;
+}
+.cx-divisor { -fx-min-width: 1; -fx-max-width: 1; -fx-pref-height: 22; -fx-max-height: 22; -fx-background-color: -linha; }
+.cx-filtros-rotulo { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.scroll-pane.cx-categorias, .scroll-pane.cx-categorias > .viewport { -fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0; }
+
+/* troca ao vivo ainda não confirmada */
+.vaga.pendente .vaga-placa { -fx-background-color: linear-gradient(to bottom, rgba(24,48,96,0.96), rgba(13,26,54,0.96)); -fx-border-color: #6ea0ff; }
+.vaga.pendente .foto-aro { -fx-effect: dropshadow(gaussian, rgba(110,160,255,0.95), 9, 0.4, 0, 0); }
+.atleta.sai-pendente { -fx-background-color: rgba(47,111,224,0.16); -fx-border-color: #6ea0ff; -fx-border-style: segments(5, 4); -fx-border-radius: 6; }
+
+/* seleção de países (novo jogo): espaço entre a caixinha e a bandeira */
+.check-box.caixa-pais { -fx-label-padding: 0 0 0 10; -fx-padding: 3 6 3 2; }
+.check-box.caixa-pais .box { -fx-padding: 3; }
+
+/* suspense do pênalti na narração */
+.penalti-passo { -fx-font-family: "Arial"; -fx-font-size: 15px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: -tinta; }
+.penalti-passo.penalti-marcado { -fx-text-fill: #f5c451; }
+.penalti-passo.penalti-erro { -fx-font-size: 17px; -fx-text-fill: #ff6a5c; }
+.penalti-passo.penalti-gol { -fx-font-size: 17px; -fx-text-fill: #39c47f; }
+
+/* zonas das tabelas: classificação para a fase seguinte também tinge a linha; legenda com as regras */
+.table-row-cell.tinta-zona-classifica { -fx-background-color: rgba(39,89,201,0.10); }
+.legenda-zonas { -fx-padding: 2 0 0 2; }
+.legenda-zonas .nota-acesso { -fx-text-fill: #5fd39a; }
+.legenda-zonas .nota-queda { -fx-text-fill: #ff7b70; }
+
+/* controle segmentado que ocupa a largura (Treino · Todo o elenco, abas da lista de campeonatos) */
+.segmentos-cheios .toggle-button { -fx-padding: 6 4 6 4; -fx-min-height: 30; -fx-font-size: 12.5px; }
+.abas-lista .toggle-button { -fx-min-height: 34; -fx-padding: 4 4 4 4; -fx-font-size: 12.5px; }
+.abas-lista .toggle-button:selected { -fx-font-weight: bold; }
+.chave-secundaria .toggle-button { -fx-min-height: 26; -fx-padding: 3 8 3 8; -fx-font-size: 11.5px; }
+
+/* ------------------------------------------------------------------ ordem dos batedores (disputa de pênaltis / shoot out) */
+.ordem-penaltis .pen-ajuda { -fx-padding: 0 0 4 0; }
+.pen-lista { -fx-padding: 4 0 0 0; }
+.pen-linha {
+    -fx-min-height: 36; -fx-pref-height: 36; -fx-padding: 0 8 0 6;
+    -fx-background-color: rgba(255,255,255,0.025); -fx-background-radius: 7;
+    -fx-border-color: transparent; -fx-border-width: 2 0 2 0; -fx-cursor: open-hand;
+}
+.pen-linha.pen-par { -fx-background-color: rgba(255,255,255,0.055); }
+.pen-linha:hover { -fx-background-color: rgba(255,255,255,0.10); }
+.pen-linha.pen-arrastando { -fx-opacity: 0.4; }
+.pen-linha.pen-cai-acima { -fx-border-color: -acento-nav transparent transparent transparent; }
+.pen-linha.pen-cai-abaixo { -fx-border-color: transparent transparent -acento-nav transparent; }
+.pen-alca { -fx-min-width: 3; -fx-pref-width: 3; -fx-max-width: 3; -fx-min-height: 20; -fx-max-height: 20; -fx-background-radius: 2; -fx-background-color: transparent; }
+.pen-serie .pen-alca { -fx-background-color: -acento-nav; }
+.pen-num {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta2;
+    -fx-min-width: 24; -fx-pref-width: 24; -fx-pref-height: 24; -fx-alignment: center;
+    -fx-background-color: #31363f; -fx-background-radius: 12;
+}
+.pen-serie .pen-num { -fx-text-fill: white; -fx-background-color: -acento-medio; }
+.pen-nome { -fx-font-weight: bold; -fx-font-size: 13.5px; -fx-text-overrun: ellipsis; }
+.pen-alternada .pen-nome { -fx-text-fill: -tinta2; }
+.button.pen-seta { -fx-padding: 3 7 3 7; -fx-font-size: 10px; -fx-text-fill: -tinta3; -fx-opacity: 0.45; -fx-background-color: transparent; }
+.pen-linha:hover .button.pen-seta { -fx-opacity: 1; -fx-text-fill: -tinta; }
+.pen-linha:hover .button.pen-seta:hover { -fx-background-color: rgba(255,255,255,0.12); -fx-background-radius: 5; }
+.button.pen-seta:disabled { -fx-opacity: 0.12; }
+.pen-separador-linha { -fx-padding: 10 4 4 4; }
+.pen-separador { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.pen-fio { -fx-min-height: 1; -fx-pref-height: 1; -fx-max-height: 1; -fx-background-color: -linha; }
+.pen-linha:hover .button.pen-seta:disabled { -fx-opacity: 0.12; }
+
+/* ================================================================== negociação (ng-): proposta, passe livre, empréstimo */
+.caixa-sobreposta.caixa-negocio { -fx-padding: 0 0 16 0; -fx-spacing: 0; }
+.caixa-negocio > .acoes-modal { -fx-padding: 14 22 0 22; -fx-border-color: -linha transparent transparent transparent; -fx-border-width: 1 0 0 0; -fx-spacing: 10; }
+.ng-cabecalho { -fx-padding: 16 22 14 18; -fx-background-radius: 12 12 0 0; }
+.ng-sobre { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 10.5px; -fx-text-fill: rgba(255,255,255,0.62); }
+.ng-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 25px; -fx-text-fill: white; }
+.ng-info { -fx-text-fill: rgba(255,255,255,0.86); -fx-font-size: 12.5px; }
+.ng-info-sep { -fx-text-fill: rgba(255,255,255,0.4); }
+.ng-clube { -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; }
+.ng-forca-caixa {
+    -fx-background-color: rgba(10,14,18,0.42); -fx-background-radius: 10; -fx-padding: 6 14 6 14;
+    -fx-border-color: rgba(255,255,255,0.12); -fx-border-radius: 10;
+}
+.ng-forca { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 40px; }
+.ng-forca-rotulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 9.5px; -fx-text-fill: rgba(255,255,255,0.6); }
+.ng-cabecalho .forca-texto.f6 { -fx-text-fill: #4fdc98; }
+.ng-corpo { -fx-padding: 16 22 16 22; }
+.ng-cartao {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+}
+.ng-cartao-rotulo { -fx-font-size: 10px; -fx-text-fill: -tinta3; -fx-font-weight: bold; }
+.ng-cartao-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 18px; -fx-text-fill: -tinta; }
+.ng-cartao-sub { -fx-font-size: 10.5px; -fx-text-fill: -tinta3; }
+.ng-cartao.ng-atencao { -fx-background-color: -ambar-claro; -fx-border-color: -ambar; }
+.ng-cartao.ng-atencao .ng-cartao-valor { -fx-text-fill: #f0b54a; }
+.ng-cartao.ng-perigo { -fx-background-color: -vermelho-claro; -fx-border-color: -vermelho; }
+.ng-cartao.ng-perigo .ng-cartao-valor { -fx-text-fill: #ff7468; }
+.ng-rotulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.text-field.campo-dinheiro {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 17px; -fx-padding: 4 12 4 12; -fx-pref-height: 36; -fx-min-height: 36;
+    -fx-background-color: #20242a;
+}
+.text-field.campo-dinheiro.grande { -fx-font-size: 24px; -fx-pref-height: 46; -fx-min-height: 46; -fx-pref-width: 240; }
+.text-field.campo-dinheiro.acima { -fx-border-color: -vermelho; -fx-text-fill: #ff7468; }
+.button.atalho-dinheiro {
+    -fx-background-color: -superficie; -fx-border-color: -linha-forte; -fx-background-radius: 0; -fx-border-radius: 0;
+    -fx-padding: 0 12 0 12; -fx-min-height: 32; -fx-pref-height: 32; -fx-font-size: 12px; -fx-text-fill: -tinta2;
+    -fx-border-width: 1 0 1 1;
+}
+.button.atalho-dinheiro.ultimo { -fx-border-width: 1; -fx-background-radius: 0 6 6 0; -fx-border-radius: 0 6 6 0; }
+.button.atalho-dinheiro.primeiro { -fx-background-radius: 6 0 0 6; -fx-border-radius: 6 0 0 6; }
+.button.atalho-dinheiro:hover { -fx-background-color: #313640; -fx-text-fill: -tinta; }
+.button.atalho-dinheiro.ativo { -fx-background-color: -acento-medio; -fx-text-fill: -tinta; }
+.ng-contrato .toggle-button { -fx-min-height: 32; -fx-font-size: 12.5px; }
+.ng-resumo {
+    -fx-background-color: -acento-claro; -fx-background-radius: 8; -fx-padding: 9 14 9 14;
+    -fx-border-color: -acento-medio; -fx-border-radius: 8;
+}
+.ng-resumo-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 17px; -fx-text-fill: -tinta; }
+.ng-resumo-valor.ng-negativo { -fx-text-fill: #ff7468; }
+.ng-nota { -fx-font-size: 11px; -fx-text-fill: -tinta3; }
+.caixa-negocio > .acoes-modal > .button { -fx-min-height: 34; -fx-padding: 0 18 0 18; }
+
+/* artilharia: gols em destaque (requisito 15/11) */
+.artilharia-gols { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 20px; -fx-text-fill: #f5c542; -fx-font-weight: bold; }
+
+/* ------------------------------------------------------------------ prêmios (Bola de Ouro e seleção da liga) */
+.nota-bloco { -fx-min-width: 36; -fx-pref-width: 36; -fx-font-size: 13px; }
+/* pódio */
+.premio-podio {
+    -fx-background-color: radial-gradient(center 50% 0%, radius 90%, #33302a 0%, #23272e 55%, #1e2228 100%);
+    -fx-background-radius: 10; -fx-border-color: #4a4434; -fx-border-radius: 10; -fx-padding: 12 16 16 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 10, 0, 0, 2);
+}
+.premio-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 16px; -fx-text-fill: #f1d27a; }
+.podio-cartao {
+    -fx-background-color: linear-gradient(to bottom, #2f343c, #252a31); -fx-background-radius: 10;
+    -fx-border-color: #4b525d; -fx-border-radius: 10; -fx-border-width: 1; -fx-padding: 12 12 12 12;
+}
+.podio-cartao-ouro { -fx-border-color: #d4a72c; -fx-border-width: 1.5; -fx-background-color: linear-gradient(to bottom, #3b3520, #272a2f 60%); -fx-padding: 14 12 14 12; }
+.podio-cartao-prata { -fx-border-color: #9aa6b4; -fx-background-color: linear-gradient(to bottom, #343a43, #262a31 60%); }
+.podio-cartao-bronze { -fx-border-color: #b9814f; -fx-background-color: linear-gradient(to bottom, #3a3029, #262a31 60%); }
+.podio-foto { -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 8, 0.2, 0, 2); }
+.podio-escudo {
+    -fx-background-color: #1a1d22; -fx-background-radius: 30; -fx-border-color: #4b525d; -fx-border-radius: 30; -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 4, 0.2, 0, 1);
+}
+.podio-medalha {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-min-width: 30; -fx-min-height: 30; -fx-alignment: center;
+    -fx-background-radius: 15; -fx-text-fill: #1b1608;
+}
+.podio-ouro { -fx-background-color: linear-gradient(to bottom, #f6d878, #c99a22); }
+.podio-prata { -fx-background-color: linear-gradient(to bottom, #e9eef3, #9aa6b4); }
+.podio-bronze { -fx-background-color: linear-gradient(to bottom, #e8b384, #a66a38); }
+.podio-nome { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 17px; -fx-text-fill: white; }
+.podio-cartao-ouro .podio-nome { -fx-font-size: 19px; -fx-text-fill: #ffe39a; }
+.podio-clube { -fx-text-fill: -tinta; -fx-font-size: 13px; }
+.podio-sub { -fx-text-fill: -tinta2; -fx-font-size: 12px; }
+.podio-num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 16px; -fx-text-fill: white; }
+.podio-rotulo { -fx-font-size: 10.5px; -fx-text-fill: -tinta2; }
+/* coluna das ligas */
+.premio-coluna {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 12 8 8 10;
+}
+.premio-ligas-rolo, .premio-ligas-rolo > .viewport { -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0; }
+.premio-ligas { -fx-padding: 0 6 6 0; }
+.premio-grupo-cab { -fx-padding: 12 6 5 6; -fx-border-color: transparent transparent -linha transparent; }
+.premio-grupo-cab.primeiro { -fx-padding: 2 6 5 6; }
+.premio-grupo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 11.5px; -fx-text-fill: -tinta2; }
+.premio-grupo-icone { -fx-text-fill: -tinta2; }
+.premio-liga { -fx-padding: 6 8 6 8; -fx-background-radius: 6; -fx-alignment: center-left; }
+.premio-liga:hover { -fx-background-color: #323843; }
+.premio-liga.selecionado { -fx-background-color: -acento-claro; -fx-border-color: transparent transparent transparent -acento-nav; -fx-border-width: 0 0 0 3; }
+.premio-liga-nome { -fx-text-fill: -tinta; -fx-font-size: 13px; }
+.premio-liga.selecionado .premio-liga-nome { -fx-text-fill: white; -fx-font-weight: bold; }
+.premio-liga-div { -fx-font-size: 10.5px; -fx-text-fill: -tinta2; -fx-background-color: #343a44; -fx-background-radius: 4; -fx-padding: 1 5 1 5; }
+/* cabeçalho da liga escolhida */
+.premio-cab-liga {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 10 16 10 14;
+}
+.premio-sobretitulo { -fx-font-size: 10.5px; -fx-text-fill: #e9c55f; -fx-font-weight: bold; }
+.premio-liga-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 20px; -fx-text-fill: white; }
+/* lista dos 11 */
+.premio-onze-cab { -fx-font-size: 10.5px; -fx-text-fill: -tinta2; -fx-padding: 0 0 4 0; }
+.premio-onze-celula { -fx-padding: 5 0 5 0; -fx-min-height: 40; -fx-border-color: transparent transparent #353b45 transparent; }
+.premio-onze-nome { -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px; }
+.premio-onze-clube { -fx-text-fill: -tinta2; -fx-font-size: 11.5px; }
+.premio-onze-num { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta; }
+/* escudo do clube no canto da foto do campo */
+.vaga-escudo {
+    -fx-background-color: #14181d; -fx-background-radius: 11; -fx-border-color: rgba(255,255,255,0.25); -fx-border-radius: 11;
+    -fx-border-width: 0.8; -fx-padding: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 3, 0.3, 0, 1);
+}
+.vaga-nota { -fx-min-width: 28; }
+.premio-destaque {
+    -fx-background-color: -superficie; -fx-background-radius: 8; -fx-border-color: -linha; -fx-border-radius: 8; -fx-padding: 10 12 10 12;
+}
+.destaque-rotulo { -fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #e9c55f; }
+.destaque-nome { -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px; }
+.destaque-valor { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 14px; -fx-text-fill: -tinta; }
+
+/* caixa de entrada: linhas maiores e assunto em destaque (requisito 15/11) */
+.cx-celula { -fx-padding: 10 10 10 6; }
+.cx-assunto-grande { -fx-font-size: 15px; }
+.cx-previa { -fx-font-size: 12.5px; }
+.cx-remetente { -fx-font-size: 12px; }
+
+/* Kings: quadro "Suas armas" (cartões com selo de estado) */
+.arma-cartao { -fx-background-color: #1d2127; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1 1 1 4; -fx-border-color: -linha; -fx-padding: 8 10 8 10; }
+.arma-cartao-ok { -fx-border-color: #2fbf71 -linha -linha #2fbf71; -fx-background-color: #17271f; }
+.arma-cartao-espera { -fx-border-color: #e0a72e -linha -linha #e0a72e; }
+.arma-cartao-usada { -fx-opacity: 0.7; }
+.arma-titulo { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: white; }
+.arma-detalhe { -fx-font-size: 12px; -fx-text-fill: -tinta2; }
+.arma-selo { -fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 2 7 2 7; -fx-background-radius: 10; }
+.arma-ok { -fx-background-color: #2fbf71; -fx-text-fill: #08140d; }
+.arma-espera { -fx-background-color: #e0a72e; -fx-text-fill: #1a1204; }
+.arma-usada { -fx-background-color: #4a515c; -fx-text-fill: #d6dbe2; }
+
+/* ================================================================== pênalti a favor: quem bate? (bt-) */
+.caixa-sobreposta.caixa-batedor { -fx-padding: 0 0 14 0; -fx-spacing: 0; -fx-background-color: #181b20; -fx-border-color: #4a5360; -fx-border-width: 1; }
+.bt-cabecalho { -fx-padding: 14 20 12 16; -fx-background-radius: 12 12 0 0; }
+.bt-sobre { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 10.5px; -fx-text-fill: rgba(255,255,255,0.75); }
+.bt-titulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 24px; -fx-text-fill: white; }
+.bt-sub { -fx-font-size: 12.5px; -fx-font-weight: bold; -fx-text-fill: rgba(255,255,255,0.92); -fx-text-overrun: ellipsis; }
+.bt-corpo { -fx-padding: 12 14 8 14; }
+.bt-ajuda { -fx-font-size: 11.5px; -fx-text-fill: #aab2bd; }
+.bt-rolagem, .bt-rolagem > .viewport { -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0; }
+.bt-lista { -fx-padding: 0 2 0 0; }
+.bt-linha {
+    -fx-min-height: 52; -fx-pref-height: 52; -fx-padding: 0 8 0 8;
+    -fx-background-color: #23272e; -fx-background-radius: 8;
+    -fx-border-color: #333a44; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;
+}
+.bt-linha:hover { -fx-background-color: #2e343d; -fx-border-color: #6b7686; }
+.bt-linha:pressed { -fx-background-color: #3a424d; -fx-translate-y: 1; }
+.bt-linha.bt-recomendado { -fx-background-color: #1d3127; -fx-border-color: #39c47f; -fx-border-width: 2; }
+.bt-linha.bt-recomendado:hover { -fx-background-color: #24402f; -fx-border-color: #5ee0a0; }
+.bt-linha.bt-recomendado:pressed { -fx-background-color: #2c4d39; }
+.bt-num {
+    -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 13px; -fx-text-fill: #d6dbe2;
+    -fx-min-width: 22; -fx-pref-width: 22; -fx-pref-height: 22; -fx-alignment: center;
+    -fx-background-color: #3a414b; -fx-background-radius: 11;
+}
+.bt-recomendado .bt-num { -fx-text-fill: #0d1a13; -fx-background-color: #39c47f; }
+.bt-nome { -fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #f3f5f8; -fx-text-overrun: ellipsis; }
+.bt-selo {
+    -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 9.5px; -fx-text-fill: #0d1a13;
+    -fx-background-color: #39c47f; -fx-background-radius: 4; -fx-padding: 1 6 1 6;
+}
+.bt-amarelo { -fx-min-width: 8; -fx-pref-width: 8; -fx-min-height: 11; -fx-pref-height: 11; -fx-background-color: #f2c94c; -fx-background-radius: 1.5; }
+.bt-forca-caixa {
+    -fx-min-width: 50; -fx-padding: 3 8 3 8; -fx-background-color: #121418; -fx-background-radius: 7;
+    -fx-border-color: #3a414b; -fx-border-radius: 7;
+}
+.bt-forca { -fx-font-family: "FUTEBAS Placar"; -fx-font-size: 21px; }
+.bt-forca-rotulo { -fx-font-family: "FUTEBAS Titulo"; -fx-font-size: 8px; -fx-text-fill: #8e97a3; }
+.bt-acoes { -fx-padding: 12 14 0 14; -fx-border-color: #2e343d transparent transparent transparent; -fx-border-width: 1 0 0 0; }
+.bt-bater { -fx-text-overrun: ellipsis; }
